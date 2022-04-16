@@ -1,6 +1,7 @@
 package ui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(""));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPane.fxml"));
         controller = new ControllerGUI();
         fxmlLoader.setController(controller);
         Parent root = fxmlLoader.load();
@@ -29,6 +30,6 @@ public class Main extends Application {
         primaryStage.setTitle("People Data Base");
         primaryStage.show();
 
-//        controller.start();
+        controller.start(new ActionEvent());
     }
 }
