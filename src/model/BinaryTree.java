@@ -3,9 +3,11 @@ package model;
 public class BinaryTree<K> {
 
     private BinaryNode<K> root;
+    private boolean isBalanced;
 
     public BinaryTree() {
         this.root = null;
+        isBalanced = true;
     }
 
     public BinaryNode<K> getRoot() {
@@ -14,6 +16,14 @@ public class BinaryTree<K> {
 
     public void setRoot(BinaryNode<K> root) {
         this.root = root;
+    }
+
+    public boolean isBalanced() {
+        return isBalanced;
+    }
+
+    public void setBalanced(boolean balanced) {
+        isBalanced = balanced;
     }
 
     public void add(K k) {

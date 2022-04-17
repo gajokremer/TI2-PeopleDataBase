@@ -98,8 +98,15 @@ public class Person {
 
     private String generateCode() {
 
-        return String.valueOf(Arrays.hashCode(new String[]{code + name + surname +
-                String.valueOf(gender) + birthDate + String.valueOf(height) + nationality + photo}));
+//        return String.valueOf(Arrays.hashCode(new String[]{name + surname +
+//                String.valueOf(gender) + birthDate + String.valueOf(height) + nationality + photo}));
+
+        int code = Arrays.hashCode(new String[]{name + surname + gender +
+                birthDate + height + nationality + photo});
+
+        System.out.println("Code: " + code);
+
+        return String.valueOf(code);
     }
 
     @Override

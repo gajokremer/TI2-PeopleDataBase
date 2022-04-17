@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,20 +61,32 @@ public class ControllerGUI {
     }
 
     @FXML
-    void add(ActionEvent event) throws IOException {
+    void close(ActionEvent event) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Add.fxml"));
-        fxmlLoader.setController(this);
-        Parent menu = fxmlLoader.load();
-        mainPane.getChildren().setAll(menu);
+        Platform.exit();
+    }
+
+    @FXML
+    void save(ActionEvent event) {
+
+    }
+
+    @FXML
+    void load(ActionEvent event) {
+
+    }
+
+    @FXML
+    void add(ActionEvent event) throws IOException {
 
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Add.fxml"));
 //        fxmlLoader.setController(this);
-//        DialogPane dialoguePane = fxmlLoader.load();
-//
-//        Dialog<ButtonType> dialog = new Dialog<ButtonType>();
-//        dialog.setDialogPane(dialoguePane);
-//        dialog.showAndWait();
+//        Parent menu = fxmlLoader.load();
+//        mainPane.getChildren().setAll(menu);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPopUp.fxml"));
+        fxmlLoader.setController(this);
+        DialogPane dialoguePane = fxmlLoader.load();
 
         ArrayList<String> genders = new ArrayList<>();
         genders.add("MALE");
@@ -83,28 +96,76 @@ public class ControllerGUI {
         cb = new ChoiceBox<>(observableList);
 
         hBox.getChildren().add(cb);
+
+        Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+        dialog.setDialogPane(dialoguePane);
+        dialog.showAndWait();
+
+//        ArrayList<String> genders = new ArrayList<>();
+//        genders.add("MALE");
+//        genders.add("FEMALE");
+//
+//        ObservableList<String> observableList = FXCollections.observableArrayList(genders);
+//        cb = new ChoiceBox<>(observableList);
+//
+//        hBox.getChildren().add(cb);
+
     }
 
     @FXML
     void addPerson(ActionEvent event) {
 
-        String fullName = tfFullName.getText();
-        String[] fullNameArray = fullName.split(" ");
+        if (tfFullName.getText().trim().isEmpty() || cb.getSelectionModel().isEmpty() || dpBirthDate.getValue() == null
+                || tfHeight.getText().trim().isEmpty() || tfNationality.getText().trim().isEmpty()) {
 
-        String name = fullNameArray[0];
-        String surname = fullNameArray[1];
+            showWarningDialogue("Add person error", "All data must be present");
 
-        Gender gender = Gender.valueOf(cb.getSelectionModel().getSelectedItem());
+        } else {
 
-        LocalDate aDate = dpBirthDate.getValue();
-        String birthDate = aDate.toString();
+            String fullName = tfFullName.getText();
+            String[] fullNameArray = fullName.split(" ");
 
-        double height = Double.parseDouble(tfHeight.getText());
+            String name = fullNameArray[0];
+            String surname = fullNameArray[1];
 
-        String nationality = tfNationality.getText();
+            Gender gender = Gender.valueOf(cb.getSelectionModel().getSelectedItem());
 
-        Person person = new Person(name, surname, gender, birthDate, height, nationality);
+            LocalDate aDate = dpBirthDate.getValue();
+            String birthDate = aDate.toString();
 
-        System.out.println("Person: " + person);
+            double height = Double.parseDouble(tfHeight.getText());
+
+            String nationality = tfNationality.getText();
+
+            Person person = new Person(name, surname, gender, birthDate, height, nationality);
+
+            System.out.println("-Person: " + person);
+
+            showSuccessDialogue("Successful!", "Person added successfully");
+
+            tfFullName.setText("");
+            cb.setSelectionModel(null);
+            dpBirthDate.setValue(null);
+            tfHeight.setText("");
+            tfNationality.setText("");
+        }
+    }
+
+    public void showSuccessDialogue(String header, String message) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Data Base");
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void showWarningDialogue(String header, String message) {
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Data Base");
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
