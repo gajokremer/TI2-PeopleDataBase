@@ -7,9 +7,9 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="59.0" layoutY="270.0" text="MAIN MENU PEOPLE DATABASE">
+      <Label layoutX="144.0" layoutY="60.0" text="PEOPLE DATABASE">
          <font>
-            <Font size="48.0" />
+            <Font name="Verdana Bold" size="48.0" />
          </font>
       </Label>
    </children>
