@@ -2,11 +2,11 @@ package model;
 
 import javafx.scene.image.Image;
 
-import java.util.Arrays;
+import java.util.Objects;
 
 public class Person {
 
-    private String code;
+    private int code;
     private String name;
     private String surname;
     private Gender gender;
@@ -15,8 +15,8 @@ public class Person {
     private String nationality;
     private Image photo;
 
-    public Person(String name, String surname, Gender gender, String birthDate, double height,
-                  String nationality) {
+    public Person(String name, String surname, Gender gender, String birthDate,
+                  double height, String nationality) {
 
         this.name = name;
         this.surname = surname;
@@ -26,17 +26,18 @@ public class Person {
         this.nationality = nationality;
 //        this.photo = photo;
 
-        this.code = generateCode();
+//        this.code = generateCode();
+        this.code = hashCode();
     }
 
     public Person() {
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -96,18 +97,18 @@ public class Person {
         this.photo = photo;
     }
 
-    private String generateCode() {
-
-//        return String.valueOf(Arrays.hashCode(new String[]{name + surname +
-//                String.valueOf(gender) + birthDate + String.valueOf(height) + nationality + photo}));
-
-        int code = Arrays.hashCode(new String[]{name + surname + gender +
-                birthDate + height + nationality + photo});
-
-        System.out.println("Code: " + code);
-
-        return String.valueOf(code);
-    }
+//    private String generateCode() {
+//
+////        return String.valueOf(Arrays.hashCode(new String[]{name + surname +
+////                String.valueOf(gender) + birthDate + String.valueOf(height) + nationality + photo}));
+//
+//        int code = Arrays.hashCode(new String[]{name + surname + gender +
+//                birthDate + height + nationality + photo});
+//
+//        System.out.println("-Code: " + code);
+//
+//        return String.valueOf(code);
+//    }
 
     @Override
     public String toString() {
@@ -121,5 +122,10 @@ public class Person {
                 ", nationality='" + nationality + '\'' +
                 ", photo=" + photo +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, gender, birthDate, height, nationality, photo);
     }
 }

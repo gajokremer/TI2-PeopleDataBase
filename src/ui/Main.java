@@ -10,8 +10,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private ControllerGUI controller;
-
     public static void main(String[] args) {
 
         launch(args);
@@ -21,7 +19,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainPane.fxml"));
-        controller = new ControllerGUI();
+        ControllerGUI controller = new ControllerGUI();
         fxmlLoader.setController(controller);
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);

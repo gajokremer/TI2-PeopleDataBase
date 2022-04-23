@@ -1,34 +1,34 @@
 package model;
 
-public class BinaryTree<K> {
+public class BinaryTree<P extends Comparable<P>, V> {
 
-    private BinaryNode<K> root;
-    private boolean isBalanced;
+    private Node<P, V> root;
+//    private boolean isBalanced;
 
     public BinaryTree() {
         this.root = null;
-        isBalanced = true;
+//        isBalanced = true;
     }
 
-    public BinaryNode<K> getRoot() {
+    public Node<P, V> getRoot() {
         return root;
     }
 
-    public void setRoot(BinaryNode<K> root) {
+    public void setRoot(Node<P, V> root) {
         this.root = root;
     }
 
-    public boolean isBalanced() {
-        return isBalanced;
-    }
+//    public boolean isBalanced() {
+//        return isBalanced;
+//    }
+//
+//    public void setBalanced(boolean balanced) {
+//        isBalanced = balanced;
+//    }
 
-    public void setBalanced(boolean balanced) {
-        isBalanced = balanced;
-    }
+    public void add(V v) {
 
-    public void add(K k) {
-
-        BinaryNode<K> newNode = new BinaryNode<>(k);
+        Node<P, V> newNode = new Node<>(v);
 
         if (root == null) {
 
@@ -38,72 +38,14 @@ public class BinaryTree<K> {
 
             add(root, newNode);
         }
+
+        System.out.println("New Node: " + newNode);
     }
 
-    private void add(BinaryNode<K> root, BinaryNode<K> newNode) {
+    private void add(Node<P, V> current, Node<P, V> newNode) {
 
+        if (current != null) {
 
-    }
-
-    private void balanceTree() {
-
-
-    }
-
-    private static class BinaryNode<K> {
-
-        private K k;
-        private BinaryNode<K> parent;
-        private BinaryNode<K> left;
-        private BinaryNode<K> right;
-        private boolean isLeaf;
-
-        public BinaryNode(K k) {
-            this.k = k;
-            this.parent = null;
-            this.left = null;
-            this.right = null;
-            this.isLeaf = true;
-        }
-
-        public K getK() {
-            return k;
-        }
-
-        public void setK(K k) {
-            this.k = k;
-        }
-
-        public BinaryNode<K> getParent() {
-            return parent;
-        }
-
-        public void setParent(BinaryNode<K> parent) {
-            this.parent = parent;
-        }
-
-        public BinaryNode<K> getLeft() {
-            return left;
-        }
-
-        public void setLeft(BinaryNode<K> left) {
-            this.left = left;
-        }
-
-        public BinaryNode<K> getRight() {
-            return right;
-        }
-
-        public void setRight(BinaryNode<K> right) {
-            this.right = right;
-        }
-
-        public boolean isLeaf() {
-            return isLeaf;
-        }
-
-        public void setLeaf(boolean leaf) {
-            isLeaf = leaf;
         }
     }
 }

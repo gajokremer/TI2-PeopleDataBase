@@ -139,7 +139,8 @@ public class ControllerGUI {
 
             Person person = new Person(name, surname, gender, birthDate, height, nationality);
 
-            System.out.println("-Person: " + person);
+//            System.out.println("-Person: " + person);
+            dataBase.addToAllTrees(person);
 
             showSuccessDialogue("Successful!", "Person added successfully");
 
