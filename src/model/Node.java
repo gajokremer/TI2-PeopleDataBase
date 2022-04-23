@@ -1,11 +1,13 @@
 package model;
 
-public class Node<P extends Comparable<P>, V> implements Comparable<Node<P, V>>,Balanced {
+import jdk.nashorn.internal.ir.IfNode;
+
+public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<V>> {
 
     private V v;
-    private Node<P, V> parent;
-    private Node<P, V> left;
-    private Node<P, V> right;
+    private Node<V> parent;
+    private Node<V> left;
+    private Node<V> right;
     private boolean isLeaf;
 
     public Node(V v) {
@@ -24,27 +26,27 @@ public class Node<P extends Comparable<P>, V> implements Comparable<Node<P, V>>,
         this.v = v;
     }
 
-    public Node<P, V> getParent() {
+    public Node<V> getParent() {
         return parent;
     }
 
-    public void setParent(Node<P, V> parent) {
+    public void setParent(Node<V> parent) {
         this.parent = parent;
     }
 
-    public Node<P, V> getLeft() {
+    public Node<V> getLeft() {
         return left;
     }
 
-    public void setLeft(Node<P, V> left) {
+    public void setLeft(Node<V> left) {
         this.left = left;
     }
 
-    public Node<P, V> getRight() {
+    public Node<V> getRight() {
         return right;
     }
 
-    public void setRight(Node<P, V> right) {
+    public void setRight(Node<V> right) {
         this.right = right;
     }
 
@@ -62,6 +64,13 @@ public class Node<P extends Comparable<P>, V> implements Comparable<Node<P, V>>,
     }
 
     @Override
+    public int balanceFactor() {
+
+
+        return 0;
+    }
+
+    @Override
     public String toString() {
         return "Node{" +
                 "v=" + v +
@@ -71,13 +80,8 @@ public class Node<P extends Comparable<P>, V> implements Comparable<Node<P, V>>,
                 ", isLeaf=" + isLeaf +
                 '}';
     }
-    
-    @Override
-    public int compareTo(Node<P, V> o) {
-        return 0;
-    }
 
-    public String nodeFormat() {
+    private String nodeFormat() {
 
         String line = "";
 
@@ -86,9 +90,14 @@ public class Node<P extends Comparable<P>, V> implements Comparable<Node<P, V>>,
             line += parent.nodeFormat() + " => ";
         }
 
-        line += "[" + left + " <- "+ v + " -> " + right + "]";
+        line += "[" + left + " <- "+ v.toString() + " -> " + right + "]";
 
         return line;
     }
 
+    @Override
+    public int compareTo(Node<V> o) {
+
+       return v.compareTo(o.getV());
+    }
 }

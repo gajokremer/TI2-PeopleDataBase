@@ -2,9 +2,10 @@ package model;
 
 import javafx.scene.image.Image;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Comparable<Person> {
 
     private int code;
     private String name;
@@ -112,20 +113,29 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", gender=" + gender +
-                ", birthDate='" + birthDate + '\'' +
-                ", height=" + height +
-                ", nationality='" + nationality + '\'' +
-                ", photo=" + photo +
-                '}';
+//        return "Person{" +
+//                "code='" + code + '\'' +
+//                ", name='" + name + '\'' +
+//                ", surname='" + surname + '\'' +
+//                ", gender=" + gender +
+//                ", birthDate='" + birthDate + '\'' +
+//                ", height=" + height +
+//                ", nationality='" + nationality + '\'' +
+//                ", photo=" + photo +
+//                '}';
+
+        return "code='" + code + '\'' +
+                ", name='" + name + '\'';
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(name, surname, gender, birthDate, height, nationality, photo);
+    }
+
+    @Override
+    public int compareTo(Person o) {
+
+        return Integer.compare(code, o.getCode());
     }
 }
