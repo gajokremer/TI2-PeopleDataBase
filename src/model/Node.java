@@ -74,8 +74,10 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
         int rightFactor = depth(right, 0);
         System.out.println("Done right");
 
-        System.out.println("-Left depth: " + leftFactor);
+        System.out.println("\n-Left depth: " + leftFactor);
         System.out.println("-Right depth: " + rightFactor);
+
+        System.out.println("-Balance factor: " + (rightFactor - leftFactor));
 
         return rightFactor - leftFactor;
     }

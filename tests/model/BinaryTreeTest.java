@@ -74,13 +74,25 @@ class BinaryTreeTest {
     @Test
     public void balance() {
 
-        BinaryTree<Person> binaryTree = setUpScenario2();
-        assertFalse(binaryTree.isBalanced());
+        BinaryTree<Person> binaryTree = setUpScenario1();
+        assertTrue(binaryTree.isBalanced());
 
-        binaryTree.balance(binaryTree.getRoot());
-
-        System.out.println("\n\n-After balance: " + binaryTree);
+        Person p2 = new Person("Sebastian", "Zapata", Gender.MALE,
+                "20-08-2001", 183, "Colombian");
+        binaryTree.add(p2);
 
         assertTrue(binaryTree.isBalanced());
+
+
+        binaryTree = setUpScenario2();
+        assertTrue(binaryTree.isBalanced());
+
+//        assertFalse(binaryTree.isBalanced());
+
+//        binaryTree.balance(binaryTree.getRoot());
+
+//        System.out.println("\n\n-After balance: " + binaryTree);
+
+//        assertTrue(binaryTree.isBalanced());
     }
 }

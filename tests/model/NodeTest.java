@@ -31,7 +31,7 @@ class NodeTest {
                 "25-09-2002", 188, "Colombian");
 
         binaryTree.add(p3);
-        assertFalse(binaryTree.isBalanced());
+        assertTrue(binaryTree.isBalanced());
 
         System.out.println("\n-Balance factor: " + binaryTree.getRoot().findBalanceFactor());
 
