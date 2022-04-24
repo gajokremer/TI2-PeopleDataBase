@@ -44,18 +44,16 @@ public class BinaryTree<V extends Comparable<V>> {
         System.out.println("\nADDED ✓");
 
 
-        boolean balanced = isTreeBalanced();
-        System.out.println("\nBalanced?: " + balanced);
-
-        if (!balanced) {
-
-            System.out.println("\nSTART BALANCING ->");
-            balance(root);
-
-            System.out.println("\nBALANCED ✓\n\n");
-        }
-
-//        System.out.println("\n-New Node: " + newNode);
+//        boolean balanced = isTreeBalanced();
+//        System.out.println("\nBalanced?: " + balanced);
+//
+//        if (!balanced) {
+//
+//            System.out.println("\nSTART BALANCING ->");
+//            balance(root);
+//
+//            System.out.println("\nBALANCED ✓\n\n");
+//        }
     }
 
     private void add(Node<V> current, Node<V> newNode) {
@@ -117,38 +115,59 @@ public class BinaryTree<V extends Comparable<V>> {
 
             if (balanceFactor == 2) {
 
-                if (current.getRight().findBalanceFactor() == 1) {
+                int balanceFactorRight = current.getRight().findBalanceFactor();
+
+                if (balanceFactorRight == 1) {
 
                     System.out.println("\nCASE A");
 
                     current = leftRotate(current);
-
                 }
 
-//                else if (current.getRight().findBalanceFactor() == 0) {
-//
-//                    System.out.println("\nCASE B");
-//
-//                    current = leftRotate(current);
-//                }
+                if (balanceFactorRight == 0) {
+
+                    System.out.println("\nCASE B");
+
+                    current = leftRotate(current);
+                }
+
+                if (balanceFactorRight == -1) {
+
+                    System.out.println("\nCASE C");
+
+                    Node<V> newRight = rightRotate(current.getRight());
+                    current.setRight(newRight);
+                    current = leftRotate(current);
+                }
             }
 
-//            if (balanceFactor == -2) {
-//
-//                if (current.getLeft().findBalanceFactor() == -1) {
-//
-//                    System.out.println("\nCASE D");
-//
-//                    current = rightRotate(current);
-//                }
-//
-//                if (current.getLeft().findBalanceFactor() == 0) {
-//
-//                    System.out.println("\nCASE F");
-//
-//                    current = rightRotate(current);
-//                }
-//            }
+            if (balanceFactor == -2) {
+
+                int balanceFactorLeft = current.getLeft().findBalanceFactor();
+
+                if (balanceFactorLeft == -1) {
+
+                    System.out.println("\nCASE D");
+
+                    current = rightRotate(current);
+                }
+
+                if (balanceFactorLeft == 0) {
+
+                    System.out.println("\nCASE E");
+
+                    current = rightRotate(current);
+                }
+
+                if (balanceFactorLeft == 1) {
+
+                    System.out.println("\nCASE F");
+
+                    Node<V> newLeft = leftRotate((current.getLeft()));
+                    current.setLeft(newLeft);
+                    current = rightRotate(current);
+                }
+            }
 
 
             if (wasRoot) {
@@ -163,13 +182,19 @@ public class BinaryTree<V extends Comparable<V>> {
         if (current != null) {
 
             Node<V> atRight = current.getRight();
-            Node<V> aux = current;
+//            Node<V> aux = current;
 
-            current = atRight;
-            current.setLeft(aux);
-            current.getLeft().setRight(null);
+//            current = atRight;
+            current.setRight(null);
 
-            return current;
+            if (atRight.getLeft() != null) {
+
+                current.setRight(atRight.getLeft());
+            }
+
+            atRight.setLeft(current);
+
+            return atRight;
         }
 
         return null;
@@ -180,13 +205,19 @@ public class BinaryTree<V extends Comparable<V>> {
         if (current != null) {
 
             Node<V> atLeft = current.getLeft();
-            Node<V> aux = current;
+//            Node<V> aux = current;
 
-            current = atLeft;
-            current.setRight(aux);
-            current.getRight().setLeft(null);
+//            current = atLeft;
+            current.setLeft(null);
 
-            return current;
+            if (atLeft.getRight() != null) {
+
+               current.setLeft(atLeft.getRight());
+            }
+
+            atLeft.setRight(current);
+
+            return atLeft;
         }
 
         return null;
@@ -194,9 +225,9 @@ public class BinaryTree<V extends Comparable<V>> {
 
     @Override
     public String toString() {
-        return "BinaryTree{" +
+        return "BinaryTree{  " +
                 "root=" + root +
-                '}';
+                "  }";
 
 //        String line = "BinaryTree{";
 //

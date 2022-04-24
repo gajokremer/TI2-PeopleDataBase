@@ -98,4 +98,47 @@ class BinaryTreeTest {
 
 //        assertTrue(binaryTree.isBalanced());
     }
+
+
+    @Test
+    public void otherTest() {
+
+        BinaryTree<Person> binaryTree = new BinaryTree<>();
+
+        Person p1 = new Person();
+        p1.setCode(4);
+        binaryTree.add(p1);
+
+        Person p2 = new Person();
+        p2.setCode(2);
+        binaryTree.add(p2);
+
+        Person p3 = new Person();
+        p3.setCode(10);
+        binaryTree.add(p3);
+
+        Person p4 = new Person();
+        p4.setCode(12);
+        binaryTree.add(p4);
+
+        Person p5 = new Person();
+        p5.setCode(7);
+        binaryTree.add(p5);
+
+        Person p6 = new Person();
+        p6.setCode(6);
+        binaryTree.add(p6);
+
+        Person p7 = new Person();
+        p7.setCode(8);
+        binaryTree.add(p7);
+
+        System.out.println("==TREE BEFORE: " + binaryTree);
+
+        binaryTree.balance(binaryTree.getRoot());
+
+        System.out.println("==TREE AFTER: " + binaryTree);
+
+        assertTrue(binaryTree.isTreeBalanced());
+    }
 }

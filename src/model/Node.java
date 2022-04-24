@@ -125,13 +125,13 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
 
     @Override
     public String toString() {
-        return "Node{" +
+        return "Node{ " +
                 "v=" + v +
 //                ", parent=" + parent +
                 ", left=" + left +
                 ", right=" + right +
                 ", isLeaf=" + isLeaf() +
-                '}';
+                " }";
     }
 
 //    private String nodeFormat() {

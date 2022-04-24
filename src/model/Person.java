@@ -124,8 +124,8 @@ public class Person implements Comparable<Person> {
 //                ", photo=" + photo +
 //                '}';
 
-//        return "code='" + code + '\'' +
-        return  ", height=" + height +
+        return "code='" + code + '\'' +
+//        return  ", height=" + height +
                 ", full name='" + (name + " " + surname) + '\'';
     }
 
@@ -139,6 +139,5 @@ public class Person implements Comparable<Person> {
 
         return Integer.compare(code, o.getCode());
 //        return Double.compare(height, o.getHeight());
-//        return Integer.compare((int) height, (int) o.getHeight());
     }
 }
