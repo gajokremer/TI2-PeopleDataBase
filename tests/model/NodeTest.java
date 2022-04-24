@@ -11,11 +11,11 @@ class NodeTest {
         BinaryTree<Person> personBinaryTree = new BinaryTree<>();
 
         Person p1 = new Person("Gabriel", "Kremer", Gender.MALE,
-                "02-08-2002", 181, "Colombian");
+                "2002-08-02", 181, "Colombian");
         personBinaryTree.add(p1);
 
         Person p2 = new Person("Sebastian", "Zapata", Gender.MALE,
-                "20-08-2001", 183, "Colombian");
+                "2001-08-20", 183, "Colombian");
         personBinaryTree.add(p2);
 
         return personBinaryTree;
@@ -25,13 +25,13 @@ class NodeTest {
     void isBalanced() {
 
         BinaryTree<Person> binaryTree = setUpScenario1();
-        assertTrue(binaryTree.isBalanced());
+        assertTrue(binaryTree.isTreeBalanced());
 
         Person p3 = new Person("Sebastian", "Medina", Gender.MALE,
-                "25-09-2002", 188, "Colombian");
+                "2002-09-25", 188, "Colombian");
 
         binaryTree.add(p3);
-        assertTrue(binaryTree.isBalanced());
+        assertTrue(binaryTree.isTreeBalanced());
 
         System.out.println("\n-Balance factor: " + binaryTree.getRoot().findBalanceFactor());
 

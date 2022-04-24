@@ -28,6 +28,8 @@ public class BinaryTree<V extends Comparable<V>> {
 
     public void add(V v) {
 
+        System.out.println("\n\n\nNEW ADDITION");
+
         Node<V> newNode = new Node<>(v);
 
         if (root == null) {
@@ -39,14 +41,19 @@ public class BinaryTree<V extends Comparable<V>> {
             add(root, newNode);
         }
 
-        System.out.println("\nADDED");
+        System.out.println("\nADDED ✓");
 
-        if (!isBalanced()) {
 
+        boolean balanced = isTreeBalanced();
+        System.out.println("\nBalanced?: " + balanced);
+
+        if (!balanced) {
+
+            System.out.println("\nSTART BALANCING ->");
             balance(root);
-        }
 
-        System.out.println("\nBALANCED\n\n");
+            System.out.println("\nBALANCED ✓\n\n");
+        }
 
 //        System.out.println("\n-New Node: " + newNode);
     }
@@ -92,39 +99,62 @@ public class BinaryTree<V extends Comparable<V>> {
         }
     }
 
-    public boolean isBalanced() {
+    public boolean isTreeBalanced() {
 
         return root.isBalanced();
     }
 
     public void balance(Node<V> current){
 
-        boolean wasRoot = current == root;
+        System.out.println("\n------------BALANCE METHOD------------");
 
-        int balanceFactor = current.findBalanceFactor();
+        if (current != null) {
 
-        if (balanceFactor == -2) {
+            boolean wasRoot = current == root;
 
-            if (current.getLeft().findBalanceFactor() == 1 ||
-                    current.getLeft().findBalanceFactor() == 0) {
+            int balanceFactor = current.findBalanceFactor();
 
-                current = leftRotate(current);
+
+            if (balanceFactor == 2) {
+
+                if (current.getRight().findBalanceFactor() == 1) {
+
+                    System.out.println("\nCASE A");
+
+                    current = leftRotate(current);
+
+                }
+
+//                else if (current.getRight().findBalanceFactor() == 0) {
+//
+//                    System.out.println("\nCASE B");
+//
+//                    current = leftRotate(current);
+//                }
             }
-        }
 
-        if (balanceFactor == 2) {
+//            if (balanceFactor == -2) {
+//
+//                if (current.getLeft().findBalanceFactor() == -1) {
+//
+//                    System.out.println("\nCASE D");
+//
+//                    current = rightRotate(current);
+//                }
+//
+//                if (current.getLeft().findBalanceFactor() == 0) {
+//
+//                    System.out.println("\nCASE F");
+//
+//                    current = rightRotate(current);
+//                }
+//            }
 
-            if (current.getRight().findBalanceFactor() == 0 ||
-            current.getRight().findBalanceFactor() == -1) {
 
-                current = rightRotate(current);
+            if (wasRoot) {
+
+                root = current;
             }
-        }
-
-
-        if (wasRoot) {
-
-            root = current;
         }
     }
 
@@ -132,18 +162,15 @@ public class BinaryTree<V extends Comparable<V>> {
 
         if (current != null) {
 
-            Node<V> atLeft = current.getLeft();
+            Node<V> atRight = current.getRight();
             Node<V> aux = current;
 
-            current = atLeft;
+            current = atRight;
             current.setLeft(aux);
-            current.getLeft().setLeft(null);
+            current.getLeft().setRight(null);
 
-            return atLeft;
+            return current;
         }
-//        root = atLeft;
-//        root.setLeft(current);
-//        root.getLeft().setLeft(null);
 
         return null;
     }
@@ -152,18 +179,15 @@ public class BinaryTree<V extends Comparable<V>> {
 
         if (current != null) {
 
-            Node<V> atRight = current.getLeft();
+            Node<V> atLeft = current.getLeft();
             Node<V> aux = current;
 
-            current = atRight;
+            current = atLeft;
             current.setRight(aux);
-            current.getRight().setRight(null);
+            current.getRight().setLeft(null);
 
-            return atRight;
+            return current;
         }
-//        root = atLeft;
-//        root.setLeft(current);
-//        root.getLeft().setLeft(null);
 
         return null;
     }

@@ -67,7 +67,8 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
     @Override
     public int findBalanceFactor() {
 
-        System.out.println("\n=Root: " + this);
+        System.out.println("\nBALANCE FACTOR");
+        System.out.println("=Root: " + this);
 
         int leftFactor = depth(left, 0);
         System.out.println("Done left");
