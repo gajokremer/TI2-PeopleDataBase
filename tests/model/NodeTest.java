@@ -25,19 +25,22 @@ class NodeTest {
     void isBalanced() {
 
         BinaryTree<Person> binaryTree = setUpScenario1();
-//        assertTrue(binaryTree.getRoot().isBalanced());
+        assertTrue(binaryTree.isBalanced());
 
         Person p3 = new Person("Sebastian", "Medina", Gender.MALE,
                 "25-09-2002", 188, "Colombian");
 
         binaryTree.add(p3);
+        assertFalse(binaryTree.isBalanced());
 
-        System.out.println("\n" + binaryTree);
-        System.out.println("\nBalanced?: " + binaryTree.getRoot().isBalanced());
+        System.out.println("\n-Balance factor: " + binaryTree.getRoot().findBalanceFactor());
+
+//        System.out.println("\n" + binaryTree);
+//        System.out.println("\nBalanced?: " + binaryTree.getRoot().isBalanced());
     }
 
     @Test
-    void balanceFactor() {
+    void findBalanceFactor() {
 
         BinaryTree<Person> binaryTree = setUpScenario1();
         assertEquals(1, Math.abs(binaryTree.getRoot().findBalanceFactor()));

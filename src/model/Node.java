@@ -49,7 +49,6 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
     }
 
     public boolean isLeaf() {
-
         return right == null & left == null;
     }
 
@@ -109,24 +108,10 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
 
                 System.out.println("--Right count: " + rightCount);
 
-//        if (leftCount > rightCount){
-//
-//            return leftCount;
-//
-//        } else {
-//
-//            return rightCount;
-//        }
-
             return Math.max(leftCount, rightCount);
         }
 
         return 0;
-    }
-
-    @Override
-    public void balance(){
-
     }
 
 //    private int rightDepth(Node<V> current, int count) {

@@ -83,6 +83,47 @@ public class BinaryTree<V extends Comparable<V>> {
         }
     }
 
+    public boolean isBalanced() {
+
+        return root.isBalanced();
+    }
+
+    public void balance(Node<V> current){
+
+        boolean wasRoot = current == root;
+
+        int balanceFactor = current.findBalanceFactor();
+
+       current = leftRotate(current);
+
+       if (wasRoot) {
+
+           root = current;
+       }
+    }
+
+    private Node<V> leftRotate(Node<V> current) {
+
+        Node<V> atLeft = current.getLeft();
+        Node<V> aux = current;
+
+        current = atLeft;
+        current.setLeft(aux);
+        current.getLeft().setLeft(null);
+
+//        root = atLeft;
+//        root.setLeft(current);
+//        root.getLeft().setLeft(null);
+
+        return atLeft;
+    }
+
+    private Node<V> rightRotate(Node<V> current) {
+
+
+        return current;
+    }
+
     @Override
     public String toString() {
         return "BinaryTree{" +
