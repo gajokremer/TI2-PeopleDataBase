@@ -133,11 +133,11 @@ class BinaryTreeTest {
         p7.setCode(8);
         binaryTree.add(p7);
 
-        System.out.println("==TREE BEFORE: " + binaryTree);
+//        System.out.println("==TREE BEFORE: " + binaryTree);
 
-        binaryTree.balance(binaryTree.getRoot());
+//        binaryTree.balance(binaryTree.getRoot());
 
-        System.out.println("==TREE AFTER: " + binaryTree);
+//        System.out.println("==TREE AFTER: " + binaryTree);
 
         assertTrue(binaryTree.isTreeBalanced());
     }

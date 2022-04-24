@@ -44,16 +44,16 @@ public class BinaryTree<V extends Comparable<V>> {
         System.out.println("\nADDED ✓");
 
 
-//        boolean balanced = isTreeBalanced();
-//        System.out.println("\nBalanced?: " + balanced);
-//
-//        if (!balanced) {
-//
-//            System.out.println("\nSTART BALANCING ->");
-//            balance(root);
-//
-//            System.out.println("\nBALANCED ✓\n\n");
-//        }
+        boolean balanced = isTreeBalanced();
+        System.out.println("\nBalanced?: " + balanced);
+
+        if (!balanced) {
+
+            System.out.println("\nSTART BALANCING ->");
+            balance(root);
+
+            System.out.println("\nBALANCED ✓\n\n");
+        }
     }
 
     private void add(Node<V> current, Node<V> newNode) {
