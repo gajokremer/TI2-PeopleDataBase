@@ -125,7 +125,7 @@ public class Person implements Comparable<Person> {
 //                '}';
 
         return "code='" + code + '\'' +
-                ", name='" + name + '\'';
+                ", full name='" + (name + " " + surname) + '\'';
     }
 
     @Override

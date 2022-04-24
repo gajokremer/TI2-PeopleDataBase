@@ -39,7 +39,7 @@ public class BinaryTree<V extends Comparable<V>> {
             add(root, newNode);
         }
 
-        System.out.println("\n-New Node: " + newNode);
+//        System.out.println("\n-New Node: " + newNode);
     }
 
     private void add(Node<V> current, Node<V> newNode) {
@@ -48,15 +48,17 @@ public class BinaryTree<V extends Comparable<V>> {
 
 //            System.out.println("\n-Current: " + current);
 //            System.out.println("-New Node: " + newNode);
-//
+
 //            System.out.println("Compare: " + newNode.compareTo(current));
 //
             if (newNode.compareTo(current) < 0) {
+//            if (newNode.getV().getCode() < current.getV().getCode()) {
 
                 if (current.getLeft() == null) {
 
                     current.setLeft(newNode);
-                    newNode.setParent(current);
+//                    current.setLeaf(false);
+//                    newNode.setParent(current);
 
                 } else {
 
@@ -65,11 +67,13 @@ public class BinaryTree<V extends Comparable<V>> {
             }
 
             if (newNode.compareTo(current) > 0) {
+//            if (newNode.getV().getCode() > current.getV().getCode()) {
 
                 if (current.getRight() == null) {
 
                     current.setRight(newNode);
-                    newNode.setParent(current);
+//                    current.setLeaf(false);
+//                    newNode.setParent(current);
 
                 } else {
 
@@ -88,10 +92,5 @@ public class BinaryTree<V extends Comparable<V>> {
 //        String line = "BinaryTree{";
 //
 //        return line;
-    }
-
-    private void printTree() {
-
-
     }
 }

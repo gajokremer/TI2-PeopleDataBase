@@ -3,5 +3,6 @@ package model;
 public interface Balanced {
 
     public boolean isBalanced();
-    public int balanceFactor();
+    public int findBalanceFactor();
+    public void balance();
 }
