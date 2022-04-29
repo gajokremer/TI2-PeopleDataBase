@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class Person implements Comparable<Person> {
+public class Person {
 
     private int code;
     private String name;
@@ -134,10 +134,10 @@ public class Person implements Comparable<Person> {
         return Objects.hash(name, surname, gender, birthDate, height, nationality, photo);
     }
 
-    @Override
-    public int compareTo(Person o) {
-
-        return Integer.compare(code, o.getCode());
-//        return Double.compare(height, o.getHeight());
-    }
+//    @Override
+//    public int compareTo(Person o) {
+//
+//        return Integer.compare(code, o.getCode());
+////        return Double.compare(height, o.getHeight());
+//    }
 }

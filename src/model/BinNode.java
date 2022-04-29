@@ -1,27 +1,27 @@
 package model;
 
-public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<V>> {
+public class BinNode<V> implements Balanced {
 
-    private V v;
+    private V value;
 //    private Node<V> parent;
-    private Node<V> left;
-    private Node<V> right;
+    private BinNode<V> left;
+    private BinNode<V> right;
 //    private boolean isLeaf;
 
-    public Node(V v) {
-        this.v = v;
+    public BinNode(V value) {
+        this.value = value;
 //        this.parent = null;
         this.left = null;
         this.right = null;
 //        this.isLeaf = true;
     }
 
-    public V getV() {
-        return v;
+    public V getValue() {
+        return value;
     }
 
-    public void setV(V v) {
-        this.v = v;
+    public void setValue(V value) {
+        this.value = value;
     }
 
 //    public Node<V> getParent() {
@@ -32,19 +32,19 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
 //        this.parent = parent;
 //    }
 
-    public Node<V> getLeft() {
+    public BinNode<V> getLeft() {
         return left;
     }
 
-    public void setLeft(Node<V> left) {
+    public void setLeft(BinNode<V> left) {
         this.left = left;
     }
 
-    public Node<V> getRight() {
+    public BinNode<V> getRight() {
         return right;
     }
 
-    public void setRight(Node<V> right) {
+    public void setRight(BinNode<V> right) {
         this.right = right;
     }
 
@@ -83,7 +83,7 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
         return rightFactor - leftFactor;
     }
 
-    private int depth(Node<V> current, int count) {
+    private int depth(BinNode<V> current, int count) {
 
         System.out.println("\n--Current: " + current);
 
@@ -125,8 +125,8 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
 
     @Override
     public String toString() {
-        return "Node{ " +
-                "v=" + v +
+        return "BinNode{ " +
+                "value=" + value +
 //                ", parent=" + parent +
                 ", left=" + left +
                 ", right=" + right +
@@ -148,9 +148,9 @@ public class Node<V extends Comparable<V>> implements Balanced, Comparable<Node<
 //        return line;
 //    }
 
-    @Override
-    public int compareTo(Node<V> o) {
-
-       return v.compareTo(o.getV());
-    }
+//    @Override
+//    public int compareTo(BinNode<V> o) {
+//
+//       return value.compareTo(o.getValue());
+//    }
 }

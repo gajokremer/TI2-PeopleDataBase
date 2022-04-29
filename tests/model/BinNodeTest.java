@@ -2,21 +2,34 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Comparator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class NodeTest {
+class BinNodeTest {
+
+    private Comparator<Person> makeCodeComparator() {
+
+        return new Comparator<Person>() {
+
+            @Override
+            public int compare(Person o1, Person o2) {
+                return Integer.compare(o1.getCode(), o2.getCode());
+            }
+        };
+    }
 
     private BinaryTree<Person> setUpScenario1() {
 
-        BinaryTree<Person> personBinaryTree = new BinaryTree<>();
+        BinaryTree<Person> personBinaryTree = new BinaryTree<>(makeCodeComparator());
 
         Person p1 = new Person("Gabriel", "Kremer", Gender.MALE,
                 "2002-08-02", 181, "Colombian");
-        personBinaryTree.add(p1);
+        personBinaryTree.insert(p1);
 
         Person p2 = new Person("Sebastian", "Zapata", Gender.MALE,
                 "2001-08-20", 183, "Colombian");
-        personBinaryTree.add(p2);
+        personBinaryTree.insert(p2);
 
         return personBinaryTree;
     }
@@ -28,9 +41,9 @@ class NodeTest {
         assertTrue(binaryTree.isTreeBalanced());
 
         Person p3 = new Person("Sebastian", "Medina", Gender.MALE,
-                "2002-09-25", 188, "Colombian");
+                "2002-09-25", 185, "Colombian");
 
-        binaryTree.add(p3);
+        binaryTree.insert(p3);
         assertTrue(binaryTree.isTreeBalanced());
 
         System.out.println("\n-Balance factor: " + binaryTree.getRoot().findBalanceFactor());

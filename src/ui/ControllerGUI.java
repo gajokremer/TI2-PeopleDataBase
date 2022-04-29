@@ -142,7 +142,8 @@ public class ControllerGUI {
 //            System.out.println("-Person: " + person);
             dataBase.addToAllTrees(person);
 
-            System.out.println("\n\n=Code tree: " + dataBase.getCodeTree());
+//            System.out.println("\n\n=Code tree: " + dataBase.getCodeTree());
+            System.out.println("\n\n=AVL tree: " + dataBase.getCodeTree());
 
             showSuccessDialogue("Successful!", "Person added successfully");
 
