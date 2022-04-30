@@ -9,7 +9,7 @@ public class DataBase {
     private BinaryTree<Person> surnameTree;
     private BinaryTree<Person> fullNameTree;
 
-    private BinaryTree<Person> heightTree;
+//    private BinaryTree<Person> heightTree;
 
     public DataBase() {
 
@@ -22,6 +22,7 @@ public class DataBase {
         });
 
         nameTree = new BinaryTree<>(new Comparator<Person>() {
+
             @Override
             public int compare(Person o1, Person o2) {
                 return o1.getName().compareTo(o2.getName());
@@ -30,6 +31,7 @@ public class DataBase {
 
 
         surnameTree = new BinaryTree<>(new Comparator<Person>() {
+
             @Override
             public int compare(Person o1, Person o2) {
                 return o1.getSurname().compareTo(o2.getSurname());
@@ -37,6 +39,7 @@ public class DataBase {
         });
 
         fullNameTree = new BinaryTree<>(new Comparator<Person>() {
+
             @Override
             public int compare(Person o1, Person o2) {
                 return o1.getFullName().compareTo(o2.getFullName());
@@ -88,20 +91,19 @@ public class DataBase {
         this.fullNameTree = fullNameTree;
     }
 
-    public BinaryTree<Person> getHeightTree() {
-        return heightTree;
-    }
-
-    public void setHeightTree(BinaryTree<Person> heightTree) {
-        this.heightTree = heightTree;
-    }
+//    public BinaryTree<Person> getHeightTree() {
+//        return heightTree;
+//    }
+//
+//    public void setHeightTree(BinaryTree<Person> heightTree) {
+//        this.heightTree = heightTree;
+//    }
 
     public void insertToAllTrees(Person person) {
 
-//        codeTree.insert(person);
-
-//        nameTree.insert(person);
-//        surnameTree.insert(person);
+        codeTree.insert(person);
+        nameTree.insert(person);
+        surnameTree.insert(person);
         fullNameTree.insert(person);
 
 //        heightTree.insert(person);
@@ -109,6 +111,9 @@ public class DataBase {
 
     public void deleteFromAllTrees(Person person) {
 
+        codeTree.delete(person);
+        nameTree.delete(person);
+        surnameTree.delete(person);
         fullNameTree.delete(person);
     }
 }

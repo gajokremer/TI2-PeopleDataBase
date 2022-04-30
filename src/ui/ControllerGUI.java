@@ -113,7 +113,7 @@ public class ControllerGUI {
         cb = new ChoiceBox<>(observableList);
         hBox.getChildren().setAll(cb);
 
-        Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+        Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(dialoguePane);
         dialog.showAndWait();
 
@@ -157,10 +157,8 @@ public class ControllerGUI {
 //            System.out.println("-Person: " + person);
             dataBase.insertToAllTrees(newPerson);
 
-//            System.out.println("\n\n=Code tree: " + dataBase.getCodeTree());
-//            System.out.println("\n\n=Name tree: " + dataBase.getNameTree());
-//            System.out.println("\n\n=Surname tree: " + dataBase.getSurnameTree());
-            System.out.println("\n\n=Full Name tree: " + dataBase.getFullNameTree());
+            printAllTrees();
+
 //            System.out.println("\n\n=Height tree: " + dataBase.getHeightTree());
 
             showSuccessDialogue("Successful!", "Person added successfully.");
@@ -177,6 +175,16 @@ public class ControllerGUI {
         }
     }
 
+    private void printAllTrees() {
+
+        System.out.println("\n\n------PRINT TREES------");
+
+        System.out.println("\n=Code tree: " + dataBase.getCodeTree());
+        System.out.println("\n=Name tree: " + dataBase.getNameTree());
+        System.out.println("\n=Surname tree: " + dataBase.getSurnameTree());
+        System.out.println("\n=Full Name tree: " + dataBase.getFullNameTree());
+    }
+
     @FXML
     void search(ActionEvent event) throws IOException {
 
@@ -188,13 +196,13 @@ public class ControllerGUI {
         searchParameters.add("Code");
         searchParameters.add("Name");
         searchParameters.add("Surname");
-        searchParameters.add("Full name");
+        searchParameters.add("Full Name");
 
         ObservableList<String> observableList = FXCollections.observableArrayList(searchParameters);
         cb = new ChoiceBox<>(observableList);
         hBox.getChildren().setAll(cb);
 
-        Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+        Dialog<ButtonType> dialog = new Dialog<>();
         dialog.setDialogPane(dialoguePane);
         dialog.showAndWait();
 
@@ -210,23 +218,34 @@ public class ControllerGUI {
         if (!cb.getSelectionModel().isEmpty() && !tfSearchBar.getText().trim().isEmpty()) {
 
             Person personToFind = new Person();
-
+            String search = tfSearchBar.getText();
 
             switch (cb.getSelectionModel().getSelectedItem().toLowerCase()) {
 
                 case "code":
 
+                    personToFind.setCode(Integer.parseInt(search));
+                    toModify = dataBase.getCodeTree().find(personToFind);
+
                     break;
 
                 case "name":
+
+                    personToFind.setName(search);
+                    toModify = dataBase.getNameTree().find(personToFind);
+
                     break;
 
                 case "surname":
+
+                    personToFind.setSurname(search);
+                    toModify = dataBase.getSurnameTree().find(personToFind);
+
                     break;
 
                 case "full name":
 
-                    String[] parts = tfSearchBar.getText().split(" ");
+                    String[] parts = search.split(" ");
 
                     personToFind.setFullName(parts[0], parts[1]);
                     System.out.println("\nPerson to find: " + personToFind.getFullName());
@@ -239,7 +258,8 @@ public class ControllerGUI {
             if (toModify != null) {
 
                 showSuccessDialogue("Person found", "Click modify in menu to make changes to this person.");
-                tfToModify.setText(toModify.getFullName());
+//                tfToModify.setText(toModify.getFullName());
+                tfToModify.setText(search);
 
             } else {
 
@@ -282,7 +302,7 @@ public class ControllerGUI {
             tfNationality.setText(toModify.getNationality());
 
 
-            Dialog<ButtonType> dialog = new Dialog<ButtonType>();
+            Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(dialoguePane);
             dialog.showAndWait();
 
@@ -327,6 +347,8 @@ public class ControllerGUI {
             showSuccessDialogue("Successful!", "Person modified successfully.");
 
             tfCode.setText(String.valueOf(newPerson.getCode()));
+
+            printAllTrees();
 
         } else {
 

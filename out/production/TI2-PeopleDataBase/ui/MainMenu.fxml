@@ -23,9 +23,9 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="tfToModify" alignment="CENTER" editable="false" layoutX="314.0" layoutY="89.0" promptText="Leonardo DiCaprio">
+      <TextField fx:id="tfToModify" alignment="CENTER" editable="false" layoutX="290.0" layoutY="96.0" promptText="Leonardo DiCaprio">
          <font>
-            <Font size="14.0" />
+            <Font size="18.0" />
          </font>
       </TextField>
    </children>
