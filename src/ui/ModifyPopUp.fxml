@@ -21,44 +21,44 @@
     <content>
         <Pane prefHeight="200.0" prefWidth="600.0">
             <children>
-                <Label layoutX="170.0" layoutY="24.0" text="Full Name:">
+                <Label layoutX="174.0" layoutY="59.0" text="Full Name:">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <TextField fx:id="tfFullName" layoutX="264.0" layoutY="23.0" promptText="Steve Jobs">
+                <TextField fx:id="tfFullName" layoutX="268.0" layoutY="58.0" promptText="Leonardo DiCaprio">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </TextField>
-                <Label layoutX="187.0" layoutY="69.0" text="Gender: ">
+                <Label layoutX="190.0" layoutY="100.0" text="Gender: ">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <HBox fx:id="hBox" layoutX="264.0" layoutY="69.0" prefHeight="26.0" prefWidth="200.0" />
-                <DatePicker fx:id="dpBirthDate" layoutX="266.0" layoutY="117.0" />
-                <Label layoutX="170.0" layoutY="117.0" text="Birth Date: ">
+                <HBox fx:id="hBox" layoutX="267.0" layoutY="100.0" prefHeight="26.0" prefWidth="200.0" />
+                <DatePicker fx:id="dpBirthDate" layoutX="270.0" layoutY="145.0" promptText="MM/DD/YY" />
+                <Label layoutX="174.0" layoutY="145.0" text="Birth Date: ">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <Label layoutX="198.0" layoutY="167.0" text="Height: ">
+                <Label layoutX="201.0" layoutY="192.0" text="Height: ">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <TextField fx:id="tfHeight" layoutX="264.0" layoutY="167.0" promptText="180 cm">
+                <TextField fx:id="tfHeight" layoutX="267.0" layoutY="192.0" promptText="183 cm">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </TextField>
-                <Label layoutX="164.0" layoutY="221.0" text="Nationality:">
+                <Label layoutX="168.0" layoutY="238.0" text="Nationality:">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Label>
-                <TextField fx:id="tfNationality" layoutX="264.0" layoutY="221.0" promptText="American">
+                <TextField fx:id="tfNationality" layoutX="268.0" layoutY="238.0" promptText="American">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -73,6 +73,16 @@
                   <Font size="24.0" />
                </font>
             </Button>
+            <TextField fx:id="tfCode" editable="false" layoutX="267.0" layoutY="14.0" promptText="Code">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="211.0" layoutY="15.0" text="Code:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
             </children>
         </Pane>
     </content>

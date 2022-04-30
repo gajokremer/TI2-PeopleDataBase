@@ -96,7 +96,7 @@ public class DataBase {
         this.heightTree = heightTree;
     }
 
-    public void addToAllTrees(Person person) {
+    public void insertToAllTrees(Person person) {
 
 //        codeTree.insert(person);
 
@@ -105,5 +105,10 @@ public class DataBase {
         fullNameTree.insert(person);
 
 //        heightTree.insert(person);
+    }
+
+    public void deleteFromAllTrees(Person person) {
+
+        fullNameTree.delete(person);
     }
 }

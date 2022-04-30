@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import model.DataBase;
@@ -54,7 +56,13 @@ public class ControllerGUI {
     @FXML
     private TextField tfSearchBar;
 
-    private Person modifyingNow;
+    @FXML
+    private TextField tfToModify;
+
+    @FXML
+    private TextField tfCode;
+
+    private Person toModify;
 
     @FXML
     void start(ActionEvent event) throws IOException {
@@ -66,7 +74,7 @@ public class ControllerGUI {
 
         Person p1 = new Person("Gabriel", "Kremer", Gender.MALE,
                 "2002-08-02", 181, "Colombian");
-        dataBase.addToAllTrees(p1);
+        dataBase.insertToAllTrees(p1);
     }
 
     @FXML
@@ -103,8 +111,7 @@ public class ControllerGUI {
 
         ObservableList<String> observableList = FXCollections.observableArrayList(genders);
         cb = new ChoiceBox<>(observableList);
-
-        hBox.getChildren().add(cb);
+        hBox.getChildren().setAll(cb);
 
         Dialog<ButtonType> dialog = new Dialog<ButtonType>();
         dialog.setDialogPane(dialoguePane);
@@ -117,7 +124,7 @@ public class ControllerGUI {
 //        ObservableList<String> observableList = FXCollections.observableArrayList(genders);
 //        cb = new ChoiceBox<>(observableList);
 //
-//        hBox.getChildren().add(cb);
+//        hBox.getChildren().setAll(cb);
 
     }
 
@@ -148,7 +155,7 @@ public class ControllerGUI {
             Person newPerson = new Person(name, surname, gender, birthDate, height, nationality);
 
 //            System.out.println("-Person: " + person);
-            dataBase.addToAllTrees(newPerson);
+            dataBase.insertToAllTrees(newPerson);
 
 //            System.out.println("\n\n=Code tree: " + dataBase.getCodeTree());
 //            System.out.println("\n\n=Name tree: " + dataBase.getNameTree());
@@ -156,7 +163,7 @@ public class ControllerGUI {
             System.out.println("\n\n=Full Name tree: " + dataBase.getFullNameTree());
 //            System.out.println("\n\n=Height tree: " + dataBase.getHeightTree());
 
-            showSuccessDialogue("Successful!", "Person added successfully");
+            showSuccessDialogue("Successful!", "Person added successfully.");
 
             tfFullName.setText("");
 //            cb.setSelectionModel(null);
@@ -166,7 +173,7 @@ public class ControllerGUI {
 
         } else {
 
-            showWarningDialogue("Addition error", "All data must be present");
+            showWarningDialogue("Addition error", "All data must be present.");
         }
     }
 
@@ -185,65 +192,17 @@ public class ControllerGUI {
 
         ObservableList<String> observableList = FXCollections.observableArrayList(searchParameters);
         cb = new ChoiceBox<>(observableList);
-
-        hBox.getChildren().add(cb);
+        hBox.getChildren().setAll(cb);
 
         Dialog<ButtonType> dialog = new Dialog<ButtonType>();
         dialog.setDialogPane(dialoguePane);
         dialog.showAndWait();
+
+//        tfToModify.setText(toModify.getFullName());
     }
 
     @FXML
     void searchPerson(ActionEvent event) throws IOException {
-
-//        System.out.println("\nSearch Parameter: " + cb.getSelectionModel().getSelectedItem());
-//        System.out.println("Search bar: " + tfSearchBar.getText());
-//
-//        if (!cb.getSelectionModel().isEmpty() && !tfSearchBar.getText().trim().isEmpty()) {
-//
-//            Person personToFind = new Person();
-//
-//
-//            switch (cb.getSelectionModel().getSelectedItem().toLowerCase()) {
-//
-//                case "code":
-//
-//                    break;
-//
-//                case "name":
-//                    break;
-//
-//                case "surname":
-//                    break;
-//
-//                case "full name":
-//
-//                    String[] parts = tfSearchBar.getText().split(" ");
-//
-//                    personToFind.setFullName(parts[0], parts[1]);
-//                    System.out.println("\nPerson to find: " + personToFind.getFullName());
-//
-//                    modifyingNow = dataBase.getFullNameTree().find(personToFind);
-//
-//                    break;
-//            }
-//
-//            if (modifyingNow != null) {
-//
-//                showSuccessDialogue("Person found", "This person is now being modified");
-//            }
-//
-//            cb.setSelectionModel(null);
-//            tfSearchBar.setText("");
-//
-//            System.out.println("\n-Modifying now: " + modifyingNow);
-//
-//        } else {
-//
-//            showWarningDialogue("Search error", "All data must be present");
-//        }
-
-
 
         System.out.println("\nSearch Parameter: " + cb.getSelectionModel().getSelectedItem());
         System.out.println("Search bar: " + tfSearchBar.getText());
@@ -272,32 +231,36 @@ public class ControllerGUI {
                     personToFind.setFullName(parts[0], parts[1]);
                     System.out.println("\nPerson to find: " + personToFind.getFullName());
 
-                    modifyingNow = dataBase.getFullNameTree().find(personToFind);
+                    toModify = dataBase.getFullNameTree().find(personToFind);
 
                     break;
             }
 
-            if (modifyingNow != null) {
+            if (toModify != null) {
 
-                showSuccessDialogue("Person found", "This person is now being modified");
-                modify(event);
+                showSuccessDialogue("Person found", "Click modify in menu to make changes to this person.");
+                tfToModify.setText(toModify.getFullName());
+
+            } else {
+
+                showWarningDialogue("Search error", "Person not found in database.");
             }
 
-            cb.setSelectionModel(null);
-            tfSearchBar.setText("");
+            System.out.println("\n-Modifying now: " + toModify);
 
-            System.out.println("\n-Modifying now: " + modifyingNow);
+//            cb.setSelectionModel(null);
+            tfSearchBar.setText("");
 
         } else {
 
-            showWarningDialogue("Search error", "All data must be present");
+            showWarningDialogue("Search error", "All data must be present.");
         }
     }
 
     @FXML
-    void modify(ActionEvent event) throws IOException {
+    void modify() throws IOException {
 
-        if (modifyingNow != null) {
+        if (toModify != null) {
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyPopUp.fxml"));
             fxmlLoader.setController(this);
@@ -309,34 +272,81 @@ public class ControllerGUI {
 
             ObservableList<String> observableList = FXCollections.observableArrayList(genders);
             cb = new ChoiceBox<>(observableList);
+            hBox.getChildren().setAll(cb);
 
-            tfFullName.setText(modifyingNow.getFullName());
-//            cb.setSelectionModel();
+            tfCode.setText(String.valueOf(toModify.getCode()));
 
-            dpBirthDate.setValue(LocalDate.parse(modifyingNow.getBirthDate()));
-            tfHeight.setText(String.valueOf(modifyingNow.getHeight()));
-            tfNationality.setText(modifyingNow.getNationality());
+            tfFullName.setText(toModify.getFullName());
+            dpBirthDate.setValue(LocalDate.parse(toModify.getBirthDate()));
+            tfHeight.setText(String.valueOf(toModify.getHeight()));
+            tfNationality.setText(toModify.getNationality());
 
-            hBox.getChildren().add(cb);
 
             Dialog<ButtonType> dialog = new Dialog<ButtonType>();
             dialog.setDialogPane(dialoguePane);
             dialog.showAndWait();
 
+            toModify = null;
+            tfToModify.setText("");
+
         } else {
 
-            showWarningDialogue("Modify error", "No person is being modified");
+            showWarningDialogue("Modify error", "No person is being modified. " +
+                    "Open search menu to assign one.");
+        }
+    }
+
+    @FXML
+    void updatePerson(ActionEvent event) {
+
+        if (!tfFullName.getText().trim().isEmpty() && !cb.getSelectionModel().isEmpty() &&
+                dpBirthDate.getValue() != null && !tfHeight.getText().trim().isEmpty() &&
+                !tfNationality.getText().trim().isEmpty()) {
+
+            dataBase.deleteFromAllTrees(toModify);
+
+            String fullName = tfFullName.getText();
+            String[] fullNameArray = fullName.split(" ");
+
+            String name = fullNameArray[0];
+            String surname = fullNameArray[1];
+
+            Gender gender = Gender.valueOf(cb.getSelectionModel().getSelectedItem());
+
+            LocalDate aDate = dpBirthDate.getValue();
+            String birthDate = aDate.toString();
+
+            double height = Double.parseDouble(tfHeight.getText());
+
+            String nationality = tfNationality.getText();
+
+            Person newPerson = new Person(name, surname, gender, birthDate, height, nationality);
+
+            dataBase.insertToAllTrees(newPerson);
+
+            showSuccessDialogue("Successful!", "Person modified successfully.");
+
+            tfCode.setText(String.valueOf(newPerson.getCode()));
+
+        } else {
+
+            showWarningDialogue("Update error", "All data must be present.");
         }
     }
 
     @FXML
     void removePerson(ActionEvent event) {
 
-    }
+        dataBase.deleteFromAllTrees(toModify);
 
-    @FXML
-    void updatePerson(ActionEvent event) {
+        showSuccessDialogue("Removal successful", "This person has been erased from the database.");
 
+        tfCode.setText("");
+        tfFullName.setText("");
+//            cb.setSelectionModel(null);
+        dpBirthDate.setValue(null);
+        tfHeight.setText("");
+        tfNationality.setText("");
     }
 
     public void showSuccessDialogue(String header, String message) {
