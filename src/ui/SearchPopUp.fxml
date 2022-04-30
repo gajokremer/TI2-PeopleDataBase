@@ -19,8 +19,17 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="searchBar" layoutX="160.0" layoutY="108.0" />
-            <Button layoutX="201.0" layoutY="185.0" mnemonicParsing="false" onAction="#searchPerson" style="-fx-background-color: #2e4c89#2e4c89 #2e4c89#2e4c89 #2e4c89#2e4c89 #2e4c89#2e4c89;" text="Search" textFill="WHITE">
+            <TextField fx:id="tfSearchBar" alignment="CENTER" layoutX="130.0" layoutY="108.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Button layoutX="130.0" layoutY="185.0" mnemonicParsing="false" onAction="#searchPerson" style="-fx-background-color: #2e4c89#2e4c89 #2e4c89#2e4c89 #2e4c89#2e4c89 #2e4c89#2e4c89;" text="Search" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="274.0" layoutY="185.0" mnemonicParsing="false" onAction="#modify" style="-fx-background-color: #2e4c89#2e4c89 #2e4c89#2e4c89 #2e4c89#2e4c89 #2e4c89#2e4c89;" text="Modify" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

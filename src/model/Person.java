@@ -122,20 +122,20 @@ public class Person {
 
     @Override
     public String toString() {
-//        return "Person{" +
-//                "code='" + code + '\'' +
-//                ", name='" + name + '\'' +
-//                ", surname='" + surname + '\'' +
-//                ", gender=" + gender +
-//                ", birthDate='" + birthDate + '\'' +
-//                ", height=" + height +
-//                ", nationality='" + nationality + '\'' +
-//                ", photo=" + photo +
-//                '}';
+        return "Person{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", gender=" + gender +
+                ", birthDate='" + birthDate + '\'' +
+                ", height=" + height +
+                ", nationality='" + nationality + '\'' +
+                ", photo=" + photo +
+                '}';
 
-        return "code='" + code + '\'' +
+//        return "code='" + code + '\'' +
 //        return  ", height=" + height +
-                ", full name='" + (name + " " + surname) + '\'';
+//                ", full name='" + (name + " " + surname) + '\'';
     }
 
     @Override

@@ -9,7 +9,6 @@ public class BinaryTree<V> implements aTree<V> {
     private final Comparator<V> comparator;
 
     public BinaryTree(Comparator<V> comparator) {
-
         this.comparator = comparator;
     }
 
@@ -398,10 +397,15 @@ public class BinaryTree<V> implements aTree<V> {
 
     public V find(V valueToSearch) {
 
-        return valueToSearch = find(valueToSearch, root);
+        return find(valueToSearch, root);
     }
 
     private V find(V valueToSearch, BinNode<V> current) {
+
+        if (current == null) {
+
+            return null;
+        }
 
         if (comparator.compare(valueToSearch, current.getValue()) == 0) {
 
@@ -417,7 +421,7 @@ public class BinaryTree<V> implements aTree<V> {
             return find(valueToSearch, current.getRight());
         }
 
-        return null;
+        return valueToSearch;
     }
 
     @Override
