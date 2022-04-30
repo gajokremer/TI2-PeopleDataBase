@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar>
@@ -22,9 +21,8 @@
           <Menu mnemonicParsing="false" text="Menu">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#add" text="Add" />
-                  <MenuItem mnemonicParsing="false" text="Modify" />
-                  <MenuItem mnemonicParsing="false" text="Find" />
-                  <MenuItem mnemonicParsing="false" text="Remove" />
+                  <MenuItem mnemonicParsing="false" onAction="#modify" text="Modify" />
+                  <MenuItem mnemonicParsing="false" onAction="#search" text="Search" />
             </items>
           </Menu>
         </menus>

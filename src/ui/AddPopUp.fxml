@@ -12,53 +12,53 @@
 <?import javafx.scene.text.Font?>
 
 <DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-    <expandableContent>
+   <expandableContent>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-    </expandableContent>
+   </expandableContent>
    <buttonTypes>
       <ButtonType fx:constant="CLOSE" />
    </buttonTypes>
    <content>
       <Pane prefHeight="200.0" prefWidth="600.0">
          <children>
-            <Label layoutX="171.0" layoutY="15.0" text="Full Name:">
+            <Label layoutX="170.0" layoutY="24.0" text="Full Name:">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="tfFullName" layoutX="265.0" layoutY="14.0" promptText="Steve Jobs">
+            <TextField fx:id="tfFullName" layoutX="264.0" layoutY="23.0" promptText="Steve Jobs">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="188.0" layoutY="60.0" text="Gender: ">
+            <Label layoutX="187.0" layoutY="69.0" text="Gender: ">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <HBox fx:id="hBox" layoutX="265.0" layoutY="60.0" prefHeight="26.0" prefWidth="200.0" />
-            <DatePicker fx:id="dpBirthDate" layoutX="267.0" layoutY="108.0" />
-            <Label layoutX="171.0" layoutY="108.0" text="Birth Date: ">
+            <HBox fx:id="hBox" layoutX="264.0" layoutY="69.0" prefHeight="26.0" prefWidth="200.0" />
+            <DatePicker fx:id="dpBirthDate" layoutX="266.0" layoutY="117.0" />
+            <Label layoutX="170.0" layoutY="117.0" text="Birth Date: ">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="199.0" layoutY="158.0" text="Height: ">
+            <Label layoutX="198.0" layoutY="167.0" text="Height: ">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="tfHeight" layoutX="265.0" layoutY="158.0" promptText="180 cm">
+            <TextField fx:id="tfHeight" layoutX="264.0" layoutY="167.0" promptText="180 cm">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="165.0" layoutY="212.0" text="Nationality:">
+            <Label layoutX="164.0" layoutY="221.0" text="Nationality:">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="tfNationality" layoutX="265.0" layoutY="212.0" promptText="American">
+            <TextField fx:id="tfNationality" layoutX="264.0" layoutY="221.0" promptText="American">
                <font>
                   <Font size="14.0" />
                </font>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+    <expandableContent>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
+    </expandableContent>
+    <buttonTypes>
+        <ButtonType fx:constant="CLOSE" />
+    </buttonTypes>
+    <content>
+        <Pane prefHeight="200.0" prefWidth="600.0">
+            <children>
+                <Label layoutX="170.0" layoutY="24.0" text="Full Name:">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="tfFullName" layoutX="264.0" layoutY="23.0" promptText="Steve Jobs">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="187.0" layoutY="69.0" text="Gender: ">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <HBox fx:id="hBox" layoutX="264.0" layoutY="69.0" prefHeight="26.0" prefWidth="200.0" />
+                <DatePicker fx:id="dpBirthDate" layoutX="266.0" layoutY="117.0" />
+                <Label layoutX="170.0" layoutY="117.0" text="Birth Date: ">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <Label layoutX="198.0" layoutY="167.0" text="Height: ">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="tfHeight" layoutX="264.0" layoutY="167.0" promptText="180 cm">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="164.0" layoutY="221.0" text="Nationality:">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="tfNationality" layoutX="264.0" layoutY="221.0" promptText="American">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+                <Button layoutX="169.0" layoutY="287.0" mnemonicParsing="false" onAction="#updatePerson" style="-fx-background-color: #2e4c89#2e4c89;" text="Update" textFill="WHITE">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Button>
+            <Button layoutX="328.0" layoutY="287.0" mnemonicParsing="false" onAction="#removePerson" style="-fx-background-color: #2e4c89#2e4c89;" text="Remove" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+            </children>
+        </Pane>
+    </content>
+    <header>
+        <Label alignment="CENTER" contentDisplay="CENTER" text="Modify Person">
+            <font>
+                <Font name="Verdana Bold Italic" size="24.0" />
+            </font>
+        </Label>
+    </header>
+</DialogPane>

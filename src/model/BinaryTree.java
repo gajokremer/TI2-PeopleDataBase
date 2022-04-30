@@ -1,5 +1,6 @@
 package model;
 
+import javax.sound.midi.Soundbank;
 import java.util.Comparator;
 
 public class BinaryTree<V> implements aTree<V> {
@@ -52,7 +53,7 @@ public class BinaryTree<V> implements aTree<V> {
         root = insert(value, root);
 
         System.out.println("\nADDED ✓");
-        System.out.println(this);
+        System.out.println(root);
 
 //        if (!isTreeBalanced()) {
 //
@@ -106,11 +107,14 @@ public class BinaryTree<V> implements aTree<V> {
 
         if (current == null) {
 
+            System.out.println("--Inserted Here");
             return new BinNode<>(value);
         }
 
+        System.out.println("Comparator: " + comparator.compare(value, current.getValue()));
+
 //        if (value.compareTo(current.getValue()) < 0) {
-        if (comparator.compare(value, current.getValue()) < 0) {
+        if (comparator.compare(value, current.getValue()) <= 0) {
 
             current.setLeft(insert(value, current.getLeft()));
 
@@ -204,7 +208,9 @@ public class BinaryTree<V> implements aTree<V> {
 
         if (current != null) {
 
-            if (current.isBalanced()) {
+            System.out.println("Balanced?:" + current.isBalanced());
+
+            if (!current.isBalanced()) {
 
                 System.out.println("\n------------BALANCE METHOD------------");
                 //            boolean wasRoot = current == root;
@@ -227,9 +233,10 @@ public class BinaryTree<V> implements aTree<V> {
                 //                root = current;
                 //            }
 
-                return current;
-
+//                return current;
             }
+
+            return current;
         }
 
         return null;
@@ -387,6 +394,30 @@ public class BinaryTree<V> implements aTree<V> {
         }
 
         return current.getValue();
+    }
+
+    public V find(V valueToSearch) {
+
+        return valueToSearch = find(valueToSearch, root);
+    }
+
+    private V find(V valueToSearch, BinNode<V> current) {
+
+        if (comparator.compare(valueToSearch, current.getValue()) == 0) {
+
+            return current.getValue();
+        }
+
+        if (comparator.compare(valueToSearch, current.getValue()) < 0) {
+
+            return find(valueToSearch, current.getLeft());
+
+        } else if (comparator.compare(valueToSearch, current.getValue()) > 0) {
+
+            return find(valueToSearch, current.getRight());
+        }
+
+        return null;
     }
 
     @Override
