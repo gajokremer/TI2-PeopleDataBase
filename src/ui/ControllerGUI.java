@@ -91,11 +91,20 @@ public class ControllerGUI {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        showSuccessDialogue("Data save successful", "Data has been saved");
     }
 
     @FXML
     void load(ActionEvent event) {
 
+        try {
+            dataBase.loadData();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        showSuccessDialogue("Data load successful", "Data has been loaded");
     }
 
     @FXML
@@ -162,7 +171,7 @@ public class ControllerGUI {
 //            System.out.println("-Person: " + person);
             dataBase.insertToAllTrees(newPerson);
 
-            printAllTrees();
+            System.out.println(dataBase.printAllTrees());
 
 //            System.out.println("\n\n=Height tree: " + dataBase.getHeightTree());
 
@@ -178,16 +187,6 @@ public class ControllerGUI {
 
             showWarningDialogue("Addition error", "All data must be present.");
         }
-    }
-
-    private void printAllTrees() {
-
-        System.out.println("\n\n------PRINT TREES------");
-
-        System.out.println("\n=Code tree: " + dataBase.getCodeTree());
-        System.out.println("\n=Name tree: " + dataBase.getNameTree());
-        System.out.println("\n=Surname tree: " + dataBase.getSurnameTree());
-        System.out.println("\n=Full Name tree: " + dataBase.getFullNameTree());
     }
 
     @FXML
@@ -353,7 +352,7 @@ public class ControllerGUI {
 
             tfCode.setText(String.valueOf(newPerson.getCode()));
 
-            printAllTrees();
+            System.out.println(dataBase.printAllTrees());
 
         } else {
 

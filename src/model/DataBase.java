@@ -1,17 +1,20 @@
 package model;
 
 import javax.xml.crypto.Data;
+import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.List;
 
 public class DataBase {
 
     private static final String NAME_SOURCE = "data/babynames-clean.csv";
     private static final String SURNAME_SOURCE = "data/Names_2010Census.csv";
-    private static final String AVL_TREES = "data/trees.txt";
+    private static final String AVL_TREES = "data/trees.bin";
 
     private BinaryTree<Person> codeTree;
     private BinaryTree<Person> nameTree;
@@ -117,6 +120,8 @@ public class DataBase {
 //        }
 
 //        heightTree.insert(person);
+
+        System.out.println(printAllTrees());
     }
 
     public void deleteFromAllTrees(Person person) {
@@ -125,14 +130,61 @@ public class DataBase {
         nameTree.delete(person);
         surnameTree.delete(person);
         fullNameTree.delete(person);
+
+        System.out.println(printAllTrees());
+    }
+
+    public String printAllTrees() {
+
+//        System.out.println("\n\n------PRINT TREES------");
+//
+//        System.out.println("\n=Code tree: " + dataBase.getCodeTree());
+//        System.out.println("\n=Name tree: " + dataBase.getNameTree());
+//        System.out.println("\n=Surname tree: " + dataBase.getSurnameTree());
+//        System.out.println("\n=Full Name tree: " + dataBase.getFullNameTree());
+
+        return "\n\n\n------PRINT TREES------" +
+                "\n\n=Code tree: " + codeTree +
+                "\n\n=Name tree: " + nameTree +
+                "\n\n=Surname tree: " + surnameTree +
+                "\n\n=Full Name tree: " + fullNameTree;
     }
 
     public void saveData() throws IOException {
 
         ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(AVL_TREES)));
 //        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(BLOCKCHAIN_DATA_BIN));
-        oos.writeObject(codeTree);
+        oos.writeObject(codeTree.getRoot());
+        oos.writeObject(nameTree.getRoot());
+        oos.writeObject(surnameTree.getRoot());
+        oos.writeObject(fullNameTree.getRoot());
+
+        System.out.println(printAllTrees());
+
         oos.close();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void loadData() throws IOException, ClassNotFoundException {
+
+        File f = new File(AVL_TREES);
+
+//        boolean isLoaded = false;
+
+        if (f.exists()) {
+
+            ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(f.toPath()));
+//            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+//            blockChain = (List<Block>) ois.readObject();
+            codeTree.setRoot((BinNode<Person>) ois.readObject());
+            nameTree.setRoot((BinNode<Person>) ois.readObject());
+            surnameTree.setRoot((BinNode<Person>) ois.readObject());
+            fullNameTree.setRoot((BinNode<Person>) ois.readObject());
+            ois.close();
+//            isLoaded = true;
+        }
+
+        System.out.println(printAllTrees());
     }
 
     public void startSimulation() {

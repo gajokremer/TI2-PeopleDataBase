@@ -1,9 +1,8 @@
 package model;
 
-import java.io.Serializable;
 import java.util.Comparator;
 
-public class BinaryTree<V> implements aTree<V>, Serializable {
+public class BinaryTree<V> implements aTree<V> {
 
     private BinNode<V> root;
     private final Comparator<V> comparator;
