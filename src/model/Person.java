@@ -2,10 +2,10 @@ package model;
 
 import javafx.scene.image.Image;
 
-import java.util.Comparator;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Serializable {
 
     private int code;
     private String name;

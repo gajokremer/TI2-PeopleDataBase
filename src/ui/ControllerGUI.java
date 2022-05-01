@@ -86,6 +86,11 @@ public class ControllerGUI {
     @FXML
     void save(ActionEvent event) {
 
+        try {
+            dataBase.saveData();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

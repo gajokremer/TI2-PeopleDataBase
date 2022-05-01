@@ -1,8 +1,17 @@
 package model;
 
+import javax.xml.crypto.Data;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Comparator;
 
 public class DataBase {
+
+    private static final String NAME_SOURCE = "data/babynames-clean.csv";
+    private static final String SURNAME_SOURCE = "data/Names_2010Census.csv";
+    private static final String AVL_TREES = "data/trees.txt";
 
     private BinaryTree<Person> codeTree;
     private BinaryTree<Person> nameTree;
@@ -43,11 +52,6 @@ public class DataBase {
             @Override
             public int compare(Person o1, Person o2) {
                 return o1.getFullName().compareTo(o2.getFullName());
-
-//                String name1 = o1.getName() + " " + o1.getSurname();
-//                String name2 = o2.getName() + " " + o2.getSurname();
-
-//                return name1.compareTo(name2);
             }
         });
 
@@ -106,6 +110,12 @@ public class DataBase {
         surnameTree.insert(person);
         fullNameTree.insert(person);
 
+//        try {
+//            saveData();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
 //        heightTree.insert(person);
     }
 
@@ -115,5 +125,18 @@ public class DataBase {
         nameTree.delete(person);
         surnameTree.delete(person);
         fullNameTree.delete(person);
+    }
+
+    public void saveData() throws IOException {
+
+        ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(AVL_TREES)));
+//        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(BLOCKCHAIN_DATA_BIN));
+        oos.writeObject(codeTree);
+        oos.close();
+    }
+
+    public void startSimulation() {
+
+
     }
 }

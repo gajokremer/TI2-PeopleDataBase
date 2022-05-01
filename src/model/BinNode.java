@@ -1,6 +1,8 @@
 package model;
 
-public class BinNode<V> implements Balanced {
+import java.io.Serializable;
+
+public class BinNode<V> implements Balanced, Serializable {
 
     private V value;
 //    private Node<V> parent;

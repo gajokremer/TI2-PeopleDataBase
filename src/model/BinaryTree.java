@@ -1,9 +1,9 @@
 package model;
 
-import javax.sound.midi.Soundbank;
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class BinaryTree<V> implements aTree<V> {
+public class BinaryTree<V> implements aTree<V>, Serializable {
 
     private BinNode<V> root;
     private final Comparator<V> comparator;
