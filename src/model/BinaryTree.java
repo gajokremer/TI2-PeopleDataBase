@@ -64,45 +64,6 @@ public class BinaryTree<V> implements aTree<V> {
 
     private BinNode<V> insert(V value, BinNode<V> current) {
 
-//        if (current != null) {
-//
-//            //            System.out.println("\n-Current: " + current);
-//            //            System.out.println("-New Node: " + newNode);
-//
-//            //            System.out.println("Compare: " + newNode.compareTo(current));
-//            //
-//            if (newNode.compareTo(current) < 0) {
-//                //            if (newNode.getV().getCode() < current.getV().getCode()) {
-//
-//                if (current.getLeft() == null) {
-//
-//                    current.setLeft(newNode);
-//                    //                    current.setLeaf(false);
-//                    //                    newNode.setParent(current);
-//
-//                } else {
-//
-//                    return insert(current.getLeft(), newNode);
-//                }
-//            }
-//
-//            if (newNode.compareTo(current) > 0) {
-//                //            if (newNode.getV().getCode() > current.getV().getCode()) {
-//
-//                if (current.getRight() == null) {
-//
-//                    current.setRight(newNode);
-//                    //                    current.setLeaf(false);
-//                    //                    newNode.setParent(current);
-//
-//                } else {
-//
-//                    return insert(current.getRight(), newNode);
-//                }
-//            }
-//        }
-
-
         if (current == null) {
 
             System.out.println("--Inserted Here");
@@ -421,6 +382,31 @@ public class BinaryTree<V> implements aTree<V> {
         }
 
         return valueToSearch;
+    }
+
+    public int countTotal() {
+
+        return count(0, root);
+    }
+
+    private int count(int count, BinNode<V> current) {
+
+        if (current == null) {
+
+            return count;
+        }
+
+        if (current.getLeft() != null) {
+
+            count = count(count, current.getLeft());
+        }
+
+        if (current.getRight() != null) {
+
+            count = count(count, current.getRight());
+        }
+
+        return count + 1;
     }
 
     @Override

@@ -19,7 +19,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="tfSearchBar" alignment="CENTER" layoutX="130.0" layoutY="108.0" promptText="...">
+            <TextField fx:id="tfSearchBar" alignment="CENTER" layoutX="130.0" layoutY="101.0" promptText="...">
                <font>
                   <Font size="18.0" />
                </font>
@@ -29,6 +29,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="198.0" layoutY="143.0" text="Case sensitive" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
     </content>
     <expandableContent>

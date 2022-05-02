@@ -1,14 +1,13 @@
 package model;
 
 import javax.xml.crypto.Data;
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class DataBase {
 
@@ -187,8 +186,102 @@ public class DataBase {
         System.out.println(printAllTrees());
     }
 
-    public void startSimulation() {
+    public void startSimulation() throws IOException {
+
+        for (double i = 0; i < 10; i++) {
+
+            String name, surname, birthDate, nationality;
+            Gender gender = null;
+            double height = 0;
+
+            BufferedReader br = new BufferedReader(new FileReader(NAME_SOURCE));
+//            String line = br.readLine();
+
+            int lineToRead = 1 + (int) (Math.random() * ((6782 - 1) + 1));
+            String line = Files.readAllLines(Paths.get(NAME_SOURCE)).get(lineToRead);
+
+            String[] parts = line.split(",");
+
+            System.out.println("Name: " + parts[0]);
+            System.out.println("Gender: " + parts[1]);
+
+            name = parts[0].toUpperCase();
+
+            if (parts[1].equals("boy")) {
+
+                gender = Gender.MALE;
+                height = 155 + (Math.random() * ((170 - 155) + 1));
+
+            } else if (parts[1].equals("girl")) {
+
+                gender = Gender.FEMALE;
+                height = 170 + (Math.random() * ((195 - 170) + 1));
+            }
+
+            line = br.readLine();
+//            }
+
+            br.close();
 
 
+            br = new BufferedReader(new FileReader(SURNAME_SOURCE));
+//        line = br.readLine();
+
+            lineToRead = 2 + (int) (Math.random() * ((162254 - 2) + 1));
+            line = Files.readAllLines(Paths.get(SURNAME_SOURCE)).get(lineToRead);
+
+            parts = line.split(",");
+            surname = parts[0];
+
+            br.close();
+
+            birthDate = generateRandomBirthDate();
+
+            nationality = "American";
+
+            Person person = new Person(name, surname, gender, birthDate, height, nationality);
+            insertToAllTrees(person);
+
+        }
+    }
+
+    private String generateRandomBirthDate() {
+
+//        int age = (int) (Math.random() * (65 + 1));
+//        int age = 0 + (int) (Math.random() * ((65 - 0) + 1));
+
+        int age = 0;
+        int day = 1 + (int) (Math.random() * ((29 - 1) + 1));
+        int month = 1 + (int) (Math.random() * ((12 - 1) + 1));
+
+        Random random = new Random();
+        double probability = random.nextDouble();
+
+//        if (probability <= 0.17) {
+//
+//            age = (int) (Math.random() * ((14) + 1));
+//        }
+
+        age = (int) (Math.random() * ((75) + 1));
+
+        int year = 2022 - age;
+
+        String result = String.valueOf(year) + "-";
+
+        if (String.valueOf(month).length() == 1) {
+
+            result += "0";
+        }
+
+        result += String.valueOf(month) + "-";
+
+        if (String.valueOf(day).length() == 1) {
+
+            result += "0";
+        }
+
+        result += String.valueOf(day);
+
+        return result;
     }
 }

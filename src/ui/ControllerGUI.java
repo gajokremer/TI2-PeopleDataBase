@@ -62,6 +62,9 @@ public class ControllerGUI {
     @FXML
     private TextField tfCode;
 
+    @FXML
+    private TextField tfTotalPeople;
+
     private Person toModify;
 
     @FXML
@@ -72,9 +75,11 @@ public class ControllerGUI {
         Parent menu = fxmlLoader.load();
         mainPane.getChildren().setAll(menu);
 
-        Person p1 = new Person("Gabriel", "Kremer", Gender.MALE,
-                "2002-08-02", 181, "Colombian");
-        dataBase.insertToAllTrees(p1);
+//        Person p1 = new Person("Gabriel", "Kremer", Gender.MALE,
+//                "2002-08-02", 181, "Colombian");
+//        dataBase.insertToAllTrees(p1);
+
+        tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
     }
 
     @FXML
@@ -105,6 +110,8 @@ public class ControllerGUI {
         }
 
         showSuccessDialogue("Data load successful", "Data has been loaded");
+
+        tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
     }
 
     @FXML
@@ -145,8 +152,6 @@ public class ControllerGUI {
     @FXML
     void addPerson(ActionEvent event) {
 
-//        if (tfFullName.getText().trim().isEmpty() || cb.getSelectionModel().isEmpty() || dpBirthDate.getValue() == null
-//                || tfHeight.getText().trim().isEmpty() || tfNationality.getText().trim().isEmpty()) {
         if (!tfFullName.getText().trim().isEmpty() && !cb.getSelectionModel().isEmpty() &&
                 dpBirthDate.getValue() != null && !tfHeight.getText().trim().isEmpty() &&
                 !tfNationality.getText().trim().isEmpty()) {
@@ -182,6 +187,10 @@ public class ControllerGUI {
             dpBirthDate.setValue(null);
             tfHeight.setText("");
             tfNationality.setText("");
+
+
+            tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
+
 
         } else {
 
@@ -365,6 +374,8 @@ public class ControllerGUI {
 
         dataBase.deleteFromAllTrees(toModify);
 
+        tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
+
         showSuccessDialogue("Removal successful", "This person has been erased from the database.");
 
         tfCode.setText("");
@@ -373,6 +384,20 @@ public class ControllerGUI {
         dpBirthDate.setValue(null);
         tfHeight.setText("");
         tfNationality.setText("");
+    }
+
+    @FXML
+    void generateSimulation(ActionEvent event) {
+
+        try {
+            dataBase.startSimulation();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
+
+        showSuccessDialogue("Simulation done", "Simulation people have been added");
     }
 
     public void showSuccessDialogue(String header, String message) {

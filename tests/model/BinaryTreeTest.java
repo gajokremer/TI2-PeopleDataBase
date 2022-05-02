@@ -140,7 +140,7 @@ class BinaryTreeTest {
     }
 
     @Test
-    public void balance() {
+    public void isTreeBalanced() {
 
         BinaryTree<Person> binaryTree = setUpScenario1();
         System.out.println("\nASSERT 1");
