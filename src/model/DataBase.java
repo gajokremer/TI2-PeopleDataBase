@@ -241,7 +241,6 @@ public class DataBase {
 
             Person person = new Person(name, surname, gender, birthDate, height, nationality);
             insertToAllTrees(person);
-
         }
     }
 

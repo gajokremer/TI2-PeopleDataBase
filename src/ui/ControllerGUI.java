@@ -12,9 +12,11 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import model.DataBase;
 import model.Gender;
 import model.Person;
+import threads.ProgressBarThread;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -64,6 +66,12 @@ public class ControllerGUI {
 
     @FXML
     private TextField tfTotalPeople;
+
+    @FXML
+    private Rectangle rctglProgressBar;
+
+    @FXML
+    private Label lbTimer;
 
     private Person toModify;
 
@@ -389,15 +397,38 @@ public class ControllerGUI {
     @FXML
     void generateSimulation(ActionEvent event) {
 
+        ProgressBarThread progressBarThread = new ProgressBarThread(this);
+        progressBarThread.start();
+
         try {
             dataBase.startSimulation();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+        progressBarThread.stop();
+
         tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
 
         showSuccessDialogue("Simulation done", "Simulation people have been added");
+    }
+
+    public void changeProgressBar(int width) {
+
+        rctglProgressBar.setWidth(rctglProgressBar.getWidth() - width);
+    }
+
+    public void changeTimer() throws IOException {
+
+        int newTime = Integer.parseInt(lbTimer.getText()) - 1;
+
+        lbTimer.setText(String.valueOf(newTime));
+
+//        if(lbTimer.getText().equals("0")) {
+//
+//            gm.addPlayer(gm.getPlayingNow());
+//            btnScoreboard(new ActionEvent());
+//        }
     }
 
     public void showSuccessDialogue(String header, String message) {
