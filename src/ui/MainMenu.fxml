@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
@@ -34,12 +33,5 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="35.0" layoutX="250.0" layoutY="507.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
-      <Rectangle fx:id="sqrProgressBar" arcHeight="5.0" arcWidth="5.0" fill="#2e4c89" height="35.0" layoutX="250.0" layoutY="507.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
-      <Label fx:id="lbTimer" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="428.0" text="60" textAlignment="CENTER">
-         <font>
-            <Font size="64.0" />
-         </font>
-      </Label>
    </children>
 </Pane>

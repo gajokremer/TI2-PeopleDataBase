@@ -67,11 +67,11 @@ public class ControllerGUI {
     @FXML
     private TextField tfTotalPeople;
 
-    @FXML
-    private Rectangle rctglProgressBar;
-
-    @FXML
-    private Label lbTimer;
+//    @FXML
+//    private Rectangle rctglProgressBar;
+//
+//    @FXML
+//    private Label lbTimer;
 
     private Person toModify;
 
@@ -369,6 +369,8 @@ public class ControllerGUI {
 
             tfCode.setText(String.valueOf(newPerson.getCode()));
 
+            toModify = newPerson;
+
             System.out.println(dataBase.printAllTrees());
 
         } else {
@@ -413,23 +415,23 @@ public class ControllerGUI {
         showSuccessDialogue("Simulation done", "Simulation people have been added");
     }
 
-    public void changeProgressBar(int width) {
-
-        rctglProgressBar.setWidth(rctglProgressBar.getWidth() - width);
-    }
-
-    public void changeTimer() throws IOException {
-
-        int newTime = Integer.parseInt(lbTimer.getText()) - 1;
-
-        lbTimer.setText(String.valueOf(newTime));
-
-//        if(lbTimer.getText().equals("0")) {
+//    public void changeProgressBar(int width) {
 //
-//            gm.addPlayer(gm.getPlayingNow());
-//            btnScoreboard(new ActionEvent());
-//        }
-    }
+//        rctglProgressBar.setWidth(rctglProgressBar.getWidth() - width);
+//    }
+//
+//    public void changeTimer() throws IOException {
+//
+//        int newTime = Integer.parseInt(lbTimer.getText()) - 1;
+//
+//        lbTimer.setText(String.valueOf(newTime));
+//
+////        if(lbTimer.getText().equals("0")) {
+////
+////            gm.addPlayer(gm.getPlayingNow());
+////            btnScoreboard(new ActionEvent());
+////        }
+//    }
 
     public void showSuccessDialogue(String header, String message) {
 

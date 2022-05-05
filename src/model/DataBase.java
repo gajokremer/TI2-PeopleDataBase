@@ -188,7 +188,7 @@ public class DataBase {
 
     public void startSimulation() throws IOException {
 
-        for (double i = 0; i < 10; i++) {
+        for (double i = 0; i < 1000; i++) {
 
             String name, surname, birthDate, nationality;
             Gender gender = null;
@@ -197,7 +197,7 @@ public class DataBase {
             BufferedReader br = new BufferedReader(new FileReader(NAME_SOURCE));
 //            String line = br.readLine();
 
-            int lineToRead = 1 + (int) (Math.random() * ((6782 - 1) + 1));
+            int lineToRead = 1 + (int) (Math.random() * ((6781 - 1) + 1));
             String line = Files.readAllLines(Paths.get(NAME_SOURCE)).get(lineToRead);
 
             String[] parts = line.split(",");
@@ -210,12 +210,12 @@ public class DataBase {
             if (parts[1].equals("boy")) {
 
                 gender = Gender.MALE;
-                height = 155 + (Math.random() * ((170 - 155) + 1));
+                height = 170 + (Math.random() * ((195 - 170) + 1));
 
             } else if (parts[1].equals("girl")) {
 
                 gender = Gender.FEMALE;
-                height = 170 + (Math.random() * ((195 - 170) + 1));
+                height = 155 + (Math.random() * ((170 - 155) + 1));
             }
 
             line = br.readLine();
