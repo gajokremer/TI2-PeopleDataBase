@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BinNodeTest {
+class NodeTest {
 
     private Comparator<Person> makeCodeComparator() {
 
@@ -19,9 +19,9 @@ class BinNodeTest {
         };
     }
 
-    private BinaryTree<Person> setUpScenario1() {
+    private AVL<Person> setUpScenario1() {
 
-        BinaryTree<Person> personBinaryTree = new BinaryTree<>(makeCodeComparator());
+        AVL<Person> personBinaryTree = new AVL<>(makeCodeComparator());
 
         Person p1 = new Person("Gabriel", "Kremer", Gender.MALE,
                 "2002-08-02", 181, "Colombian");
@@ -37,7 +37,7 @@ class BinNodeTest {
     @Test
     void isBalanced() {
 
-        BinaryTree<Person> binaryTree = setUpScenario1();
+        AVL<Person> binaryTree = setUpScenario1();
         assertTrue(binaryTree.isTreeBalanced());
 
         Person p3 = new Person("Sebastian", "Medina", Gender.MALE,
@@ -55,7 +55,7 @@ class BinNodeTest {
     @Test
     void findBalanceFactor() {
 
-        BinaryTree<Person> binaryTree = setUpScenario1();
+        AVL<Person> binaryTree = setUpScenario1();
         assertEquals(1, Math.abs(binaryTree.getRoot().findBalanceFactor()));
 
 //        System.out.println("\nDepth: " + binaryTree.getRoot().balanceFactor());

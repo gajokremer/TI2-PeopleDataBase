@@ -2,15 +2,15 @@ package model;
 
 import java.io.Serializable;
 
-public class BinNode<V> implements Balanced, Serializable {
+public class Node<V> implements Balanced, Serializable {
 
     private V value;
 //    private Node<V> parent;
-    private BinNode<V> left;
-    private BinNode<V> right;
+    private Node<V> left;
+    private Node<V> right;
 //    private boolean isLeaf;
 
-    public BinNode(V value) {
+    public Node(V value) {
         this.value = value;
 //        this.parent = null;
         this.left = null;
@@ -34,19 +34,19 @@ public class BinNode<V> implements Balanced, Serializable {
 //        this.parent = parent;
 //    }
 
-    public BinNode<V> getLeft() {
+    public Node<V> getLeft() {
         return left;
     }
 
-    public void setLeft(BinNode<V> left) {
+    public void setLeft(Node<V> left) {
         this.left = left;
     }
 
-    public BinNode<V> getRight() {
+    public Node<V> getRight() {
         return right;
     }
 
-    public void setRight(BinNode<V> right) {
+    public void setRight(Node<V> right) {
         this.right = right;
     }
 
@@ -85,7 +85,7 @@ public class BinNode<V> implements Balanced, Serializable {
         return rightFactor - leftFactor;
     }
 
-    private int depth(BinNode<V> current, int count) {
+    private int depth(Node<V> current, int count) {
 
         System.out.println("\n--Current: " + current);
 

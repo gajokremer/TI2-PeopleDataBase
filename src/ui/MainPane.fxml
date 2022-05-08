@@ -13,8 +13,9 @@
         <menus>
             <Menu mnemonicParsing="false" text="Options">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
-                  <MenuItem mnemonicParsing="false" onAction="#load" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#manualSave" text="Manual Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#manualLoad" text="Manual Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#removeAll" text="Remove all" />
                   <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
                </items>
             </Menu>

@@ -2,20 +2,20 @@ package model;
 
 import java.util.Comparator;
 
-public class BinaryTree<V> implements aTree<V> {
+public class AVL<V> implements aTree<V> {
 
-    private BinNode<V> root;
+    private Node<V> root;
     private final Comparator<V> comparator;
 
-    public BinaryTree(Comparator<V> comparator) {
+    public AVL(Comparator<V> comparator) {
         this.comparator = comparator;
     }
 
-    public BinNode<V> getRoot() {
+    public Node<V> getRoot() {
         return root;
     }
 
-    public void setRoot(BinNode<V> root) {
+    public void setRoot(Node<V> root) {
         this.root = root;
     }
 
@@ -62,12 +62,12 @@ public class BinaryTree<V> implements aTree<V> {
 //        }
     }
 
-    private BinNode<V> insert(V value, BinNode<V> current) {
+    private Node<V> insert(V value, Node<V> current) {
 
         if (current == null) {
 
             System.out.println("--Inserted Here");
-            return new BinNode<>(value);
+            return new Node<>(value);
         }
 
         System.out.println("Comparator: " + comparator.compare(value, current.getValue()));
@@ -116,7 +116,7 @@ public class BinaryTree<V> implements aTree<V> {
         root = delete(value, root);
     }
 
-    private BinNode<V> delete(V value, BinNode<V> current) {
+    private Node<V> delete(V value, Node<V> current) {
 
 //        if (value.compareTo(current.getValue()) < 0) {
         if (comparator.compare(value, current.getValue()) < 0) {
@@ -161,7 +161,7 @@ public class BinaryTree<V> implements aTree<V> {
         return root.isBalanced();
     }
 
-    public BinNode<V> applyRotations(BinNode<V> current){
+    public Node<V> applyRotations(Node<V> current){
 
 //        System.out.println("\n------------BALANCE METHOD------------");
 
@@ -201,7 +201,7 @@ public class BinaryTree<V> implements aTree<V> {
         return null;
     }
 
-    private BinNode<V> leftHeavy(BinNode<V> current) {
+    private Node<V> leftHeavy(Node<V> current) {
 
         int balanceFactorLeft = current.getLeft().findBalanceFactor();
 
@@ -223,7 +223,7 @@ public class BinaryTree<V> implements aTree<V> {
 
             System.out.println("\nCASE F");
 
-            BinNode<V> newLeft = leftRotate((current.getLeft()));
+            Node<V> newLeft = leftRotate((current.getLeft()));
             current.setLeft(newLeft);
             current = rightRotate(current);
         }
@@ -231,7 +231,7 @@ public class BinaryTree<V> implements aTree<V> {
         return current;
     }
 
-    private BinNode<V> rightHeavy(BinNode<V> current) {
+    private Node<V> rightHeavy(Node<V> current) {
 
         int balanceFactorRight = current.getRight().findBalanceFactor();
 
@@ -253,7 +253,7 @@ public class BinaryTree<V> implements aTree<V> {
 
             System.out.println("\nCASE C");
 
-            BinNode<V> newRight = rightRotate(current.getRight());
+            Node<V> newRight = rightRotate(current.getRight());
             current.setRight(newRight);
             current = leftRotate(current);
         }
@@ -261,11 +261,11 @@ public class BinaryTree<V> implements aTree<V> {
         return current;
     }
 
-    private BinNode<V> leftRotate(BinNode<V> current) {
+    private Node<V> leftRotate(Node<V> current) {
 
         if (current != null) {
 
-            BinNode<V> atRight = current.getRight();
+            Node<V> atRight = current.getRight();
             //            Node<V> aux = current;
 
             //            current = atRight;
@@ -284,11 +284,11 @@ public class BinaryTree<V> implements aTree<V> {
         return null;
     }
 
-    private BinNode<V> rightRotate(BinNode<V> current) {
+    private Node<V> rightRotate(Node<V> current) {
 
         if (current != null) {
 
-            BinNode<V> atLeft = current.getLeft();
+            Node<V> atLeft = current.getLeft();
             //            Node<V> aux = current;
 
             //            current = atLeft;
@@ -324,7 +324,7 @@ public class BinaryTree<V> implements aTree<V> {
         return getMax(root);
     }
 
-    private V getMax(BinNode<V> current) {
+    private V getMax(Node<V> current) {
 
         if (current.getRight()!= null) {
 
@@ -345,7 +345,7 @@ public class BinaryTree<V> implements aTree<V> {
         return getMin(root);
     }
 
-    private V getMin(BinNode<V> current) {
+    private V getMin(Node<V> current) {
 
         if (current.getLeft()!= null) {
 
@@ -360,7 +360,7 @@ public class BinaryTree<V> implements aTree<V> {
         return find(valueToSearch, root);
     }
 
-    private V find(V valueToSearch, BinNode<V> current) {
+    private V find(V valueToSearch, Node<V> current) {
 
         if (current == null) {
 
@@ -389,7 +389,7 @@ public class BinaryTree<V> implements aTree<V> {
         return count(0, root);
     }
 
-    private int count(int count, BinNode<V> current) {
+    private int count(int count, Node<V> current) {
 
         if (current == null) {
 

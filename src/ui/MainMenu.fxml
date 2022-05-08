@@ -33,5 +33,10 @@
             <Font size="14.0" />
          </font>
       </TextField>
+      <TextField fx:id="tfSimulationNumber" alignment="CENTER" layoutX="314.0" layoutY="389.0" promptText="Simulation Number">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
    </children>
 </Pane>

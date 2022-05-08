@@ -1,12 +1,9 @@
 package model;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Random;
 
 public class DataBase {
@@ -15,16 +12,16 @@ public class DataBase {
     private static final String SURNAME_SOURCE = "data/Names_2010Census.csv";
     private static final String AVL_TREES = "data/trees.bin";
 
-    private BinaryTree<Person> codeTree;
-    private BinaryTree<Person> nameTree;
-    private BinaryTree<Person> surnameTree;
-    private BinaryTree<Person> fullNameTree;
+    private AVL<Person> codeTree;
+    private AVL<Person> nameTree;
+    private AVL<Person> surnameTree;
+    private AVL<Person> fullNameTree;
 
 //    private BinaryTree<Person> heightTree;
 
     public DataBase() {
 
-        codeTree = new BinaryTree<>(new Comparator<Person>() {
+        codeTree = new AVL<>(new Comparator<Person>() {
 
             @Override
             public int compare(Person o1, Person o2) {
@@ -32,7 +29,7 @@ public class DataBase {
             }
         });
 
-        nameTree = new BinaryTree<>(new Comparator<Person>() {
+        nameTree = new AVL<>(new Comparator<Person>() {
 
             @Override
             public int compare(Person o1, Person o2) {
@@ -41,7 +38,7 @@ public class DataBase {
         });
 
 
-        surnameTree = new BinaryTree<>(new Comparator<Person>() {
+        surnameTree = new AVL<>(new Comparator<Person>() {
 
             @Override
             public int compare(Person o1, Person o2) {
@@ -49,7 +46,7 @@ public class DataBase {
             }
         });
 
-        fullNameTree = new BinaryTree<>(new Comparator<Person>() {
+        fullNameTree = new AVL<>(new Comparator<Person>() {
 
             @Override
             public int compare(Person o1, Person o2) {
@@ -65,35 +62,35 @@ public class DataBase {
 //        });
     }
 
-    public BinaryTree<Person> getCodeTree() {
+    public AVL<Person> getCodeTree() {
         return codeTree;
     }
 
-    public void setCodeTree(BinaryTree<Person> codeTree) {
+    public void setCodeTree(AVL<Person> codeTree) {
         this.codeTree = codeTree;
     }
 
-    public BinaryTree<Person> getNameTree() {
+    public AVL<Person> getNameTree() {
         return nameTree;
     }
 
-    public void setNameTree(BinaryTree<Person> nameTree) {
+    public void setNameTree(AVL<Person> nameTree) {
         this.nameTree = nameTree;
     }
 
-    public BinaryTree<Person> getSurnameTree() {
+    public AVL<Person> getSurnameTree() {
         return surnameTree;
     }
 
-    public void setSurnameTree(BinaryTree<Person> surnameTree) {
+    public void setSurnameTree(AVL<Person> surnameTree) {
         this.surnameTree = surnameTree;
     }
 
-    public BinaryTree<Person> getFullNameTree() {
+    public AVL<Person> getFullNameTree() {
         return fullNameTree;
     }
 
-    public void setFullNameTree(BinaryTree<Person> fullNameTree) {
+    public void setFullNameTree(AVL<Person> fullNameTree) {
         this.fullNameTree = fullNameTree;
     }
 
@@ -131,6 +128,14 @@ public class DataBase {
         fullNameTree.delete(person);
 
         System.out.println(printAllTrees());
+    }
+
+    public void resetAllTrees() {
+
+        codeTree.setRoot(null);
+        nameTree.setRoot(null);
+        surnameTree.setRoot(null);
+        fullNameTree.setRoot(null);
     }
 
     public String printAllTrees() {
@@ -175,10 +180,10 @@ public class DataBase {
             ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(f.toPath()));
 //            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
 //            blockChain = (List<Block>) ois.readObject();
-            codeTree.setRoot((BinNode<Person>) ois.readObject());
-            nameTree.setRoot((BinNode<Person>) ois.readObject());
-            surnameTree.setRoot((BinNode<Person>) ois.readObject());
-            fullNameTree.setRoot((BinNode<Person>) ois.readObject());
+            codeTree.setRoot((Node<Person>) ois.readObject());
+            nameTree.setRoot((Node<Person>) ois.readObject());
+            surnameTree.setRoot((Node<Person>) ois.readObject());
+            fullNameTree.setRoot((Node<Person>) ois.readObject());
             ois.close();
 //            isLoaded = true;
         }
@@ -186,9 +191,9 @@ public class DataBase {
         System.out.println(printAllTrees());
     }
 
-    public void startSimulation() throws IOException {
+    public void startSimulation(double number) throws IOException {
 
-        for (double i = 0; i < 1000; i++) {
+        for (double i = 0; i < number; i++) {
 
             String name, surname, birthDate, nationality;
             Gender gender = null;

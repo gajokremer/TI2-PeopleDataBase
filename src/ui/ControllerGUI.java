@@ -12,11 +12,9 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
 import model.DataBase;
 import model.Gender;
 import model.Person;
-import threads.ProgressBarThread;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -67,6 +65,9 @@ public class ControllerGUI {
     @FXML
     private TextField tfTotalPeople;
 
+    @FXML
+    private TextField tfSimulationNumber;
+
 //    @FXML
 //    private Rectangle rctglProgressBar;
 //
@@ -76,16 +77,21 @@ public class ControllerGUI {
     private Person toModify;
 
     @FXML
-    void start(ActionEvent event) throws IOException {
+    void start(ActionEvent event) throws IOException, ClassNotFoundException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         fxmlLoader.setController(this);
         Parent menu = fxmlLoader.load();
         mainPane.getChildren().setAll(menu);
 
+//        manualLoad(event);
+
+        dataBase.loadData();
+
 //        Person p1 = new Person("Gabriel", "Kremer", Gender.MALE,
 //                "2002-08-02", 181, "Colombian");
 //        dataBase.insertToAllTrees(p1);
+
 
         tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
     }
@@ -97,7 +103,7 @@ public class ControllerGUI {
     }
 
     @FXML
-    void save(ActionEvent event) {
+    void manualSave(ActionEvent event) {
 
         try {
             dataBase.saveData();
@@ -109,7 +115,7 @@ public class ControllerGUI {
     }
 
     @FXML
-    void load(ActionEvent event) {
+    void manualLoad(ActionEvent event) {
 
         try {
             dataBase.loadData();
@@ -118,6 +124,17 @@ public class ControllerGUI {
         }
 
         showSuccessDialogue("Data load successful", "Data has been loaded");
+
+        tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
+    }
+
+    @FXML
+    void removeAll(ActionEvent event) throws IOException {
+
+        dataBase.resetAllTrees();
+        dataBase.saveData();
+
+        showSuccessDialogue("Data reset", "All data has been deleted");
 
         tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
     }
@@ -158,7 +175,7 @@ public class ControllerGUI {
     }
 
     @FXML
-    void addPerson(ActionEvent event) {
+    void addPerson(ActionEvent event) throws IOException {
 
         if (!tfFullName.getText().trim().isEmpty() && !cb.getSelectionModel().isEmpty() &&
                 dpBirthDate.getValue() != null && !tfHeight.getText().trim().isEmpty() &&
@@ -199,6 +216,9 @@ public class ControllerGUI {
 
             tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
 
+            dataBase.saveData();
+
+//            manualSave(event);
 
         } else {
 
@@ -338,7 +358,7 @@ public class ControllerGUI {
     }
 
     @FXML
-    void updatePerson(ActionEvent event) {
+    void updatePerson(ActionEvent event) throws IOException {
 
         if (!tfFullName.getText().trim().isEmpty() && !cb.getSelectionModel().isEmpty() &&
                 dpBirthDate.getValue() != null && !tfHeight.getText().trim().isEmpty() &&
@@ -371,6 +391,10 @@ public class ControllerGUI {
 
             toModify = newPerson;
 
+            dataBase.saveData();
+
+//            manualSave(event);
+
             System.out.println(dataBase.printAllTrees());
 
         } else {
@@ -380,7 +404,7 @@ public class ControllerGUI {
     }
 
     @FXML
-    void removePerson(ActionEvent event) {
+    void removePerson(ActionEvent event) throws IOException {
 
         dataBase.deleteFromAllTrees(toModify);
 
@@ -394,25 +418,43 @@ public class ControllerGUI {
         dpBirthDate.setValue(null);
         tfHeight.setText("");
         tfNationality.setText("");
+
+        dataBase.saveData();
+
+//        manualSave(event);
     }
 
     @FXML
-    void generateSimulation(ActionEvent event) {
+    void generateSimulation(ActionEvent event) throws IOException {
 
-        ProgressBarThread progressBarThread = new ProgressBarThread(this);
-        progressBarThread.start();
+        if (!tfSimulationNumber.getText().trim().isEmpty()) {
 
-        try {
-            dataBase.startSimulation();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+//            ProgressBarThread progressBarThread = new ProgressBarThread(this);
+//            progressBarThread.start();
+
+            double number = Double.parseDouble(tfSimulationNumber.getText());
+
+//            try {
+//                dataBase.startSimulation(number);
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+
+            dataBase.startSimulation(number);
+
+            dataBase.saveData();
+
+//            progressBarThread.stop();
+
+            tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
+            tfSimulationNumber.setText("");
+
+            showSuccessDialogue("Simulation done", "Simulation people have been added");
+
+        } else {
+
+            showWarningDialogue("Simulation error", "There must be a value in number field");
         }
-
-        progressBarThread.stop();
-
-        tfTotalPeople.setText(String.valueOf(dataBase.getCodeTree().countTotal()));
-
-        showSuccessDialogue("Simulation done", "Simulation people have been added");
     }
 
 //    public void changeProgressBar(int width) {
