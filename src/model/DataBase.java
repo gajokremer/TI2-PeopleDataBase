@@ -1,5 +1,7 @@
 package model;
 
+import jdk.internal.dynalink.beans.StaticClass;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -10,6 +12,7 @@ public class DataBase {
 
     private static final String NAME_SOURCE = "data/babynames-clean.csv";
     private static final String SURNAME_SOURCE = "data/Names_2010Census.csv";
+    private static final String NATIONALITY_SOURCE = "data/population_by_country_2020.csv.xls";
     private static final String AVL_TREES = "data/trees.bin";
 
     private AVL<Person> codeTree;
@@ -199,17 +202,19 @@ public class DataBase {
             Gender gender = null;
             int height = 0;
 
-            BufferedReader br = new BufferedReader(new FileReader(NAME_SOURCE));
-//            String line = br.readLine();
+//            BufferedReader br = new BufferedReader(new FileReader(NAME_SOURCE));
+////            String line = br.readLine();
+//
+//            int lineToRead = 1 + (int) (Math.random() * ((6781 - 1) + 1));
+//            String line = Files.readAllLines(Paths.get(NAME_SOURCE)).get(lineToRead);
+//
+//            String[] parts = line.split(",");
+//
+//            System.out.println("Name: " + parts[0]);
+//            System.out.println("Gender: " + parts[1]);
+//
 
-            int lineToRead = 1 + (int) (Math.random() * ((6781 - 1) + 1));
-            String line = Files.readAllLines(Paths.get(NAME_SOURCE)).get(lineToRead);
-
-            String[] parts = line.split(",");
-
-            System.out.println("Name: " + parts[0]);
-            System.out.println("Gender: " + parts[1]);
-
+            String[] parts = generateRandomName();
             name = parts[0].toUpperCase();
 
             if (parts[1].equals("boy")) {
@@ -223,26 +228,9 @@ public class DataBase {
                 height = (int) (155 + (Math.random() * ((170 - 155) + 1)));
             }
 
-            line = br.readLine();
-//            }
-
-            br.close();
-
-
-            br = new BufferedReader(new FileReader(SURNAME_SOURCE));
-//        line = br.readLine();
-
-            lineToRead = 2 + (int) (Math.random() * ((162254 - 2) + 1));
-            line = Files.readAllLines(Paths.get(SURNAME_SOURCE)).get(lineToRead);
-
-            parts = line.split(",");
-            surname = parts[0];
-
-            br.close();
+            surname = generateRandomSurname();
 
             birthDate = generateRandomBirthDate();
-
-//            nationality = "American";
 
             nationality = generateRandomNationality();
 
@@ -251,63 +239,41 @@ public class DataBase {
         }
     }
 
-    private String generateRandomNationality() {
+    private String[] generateRandomName() throws IOException {
 
-        int number = 1 + (int) (Math.random() * ((13 - 1) + 1));
-        String nationality = "";
+        BufferedReader br = new BufferedReader(new FileReader(NAME_SOURCE));
 
-        switch (number) {
+        int lineToRead = 1 + (int) (Math.random() * ((6781 - 1) + 1));
+        String line = Files.readAllLines(Paths.get(NAME_SOURCE)).get(lineToRead);
 
-            case 1:
-                nationality = "American";
-                break;
+        String[] parts = line.split(",");
 
-            case 2:
-                nationality = "German";
-                break;
+        System.out.println("Name: " + parts[0]);
+        System.out.println("Gender: " + parts[1]);
 
-            case 3:
-                nationality = "Irish";
-                break;
+        line = br.readLine();
 
-            case 4:
-                nationality = "English";
-                break;
+        br.close();
 
-            case 5:
-                nationality = "Mexican";
-                break;
+        return parts;
+    }
 
-            case 6:
-                nationality = "Italian";
-                break;
+    private String generateRandomSurname() throws IOException {
 
-            case 7:
-                nationality = "Polish";
-                break;
+        String[] parts;
+        String surname;
 
-            case 8:
-                nationality = "French";
-                break;
+        BufferedReader br = new BufferedReader(new FileReader(SURNAME_SOURCE));
 
-            case 9:
-                nationality = "Scottish";
-                break;
+        int lineToRead = 2 + (int) (Math.random() * ((162254 - 2) + 1));
+        String line = Files.readAllLines(Paths.get(SURNAME_SOURCE)).get(lineToRead);
 
-            case 10:
-                nationality = "Dutch";
-                break;
+        parts = line.split(",");
+        surname = parts[0];
 
-            case 11:
-                nationality = "Norwegian";
-                break;
+        br.close();
 
-            case 12:
-                nationality = "Swedish";
-                break;
-        }
-
-        return nationality.toUpperCase();
+        return surname;
     }
 
     private String generateRandomBirthDate() {
@@ -348,5 +314,23 @@ public class DataBase {
         result += String.valueOf(day);
 
         return result;
+    }
+
+    private String generateRandomNationality() throws IOException {
+
+        String nationality;
+
+        BufferedReader br = new BufferedReader(new FileReader(NATIONALITY_SOURCE));
+
+        int lineToRead = 2 + (int) (Math.random() * ((117 - 2) + 1));
+        String line = Files.readAllLines(Paths.get(NATIONALITY_SOURCE)).get(lineToRead);
+
+        String[] parts = line.split(",");
+
+        nationality = parts[0];
+
+        br.close();
+
+        return nationality.toUpperCase();
     }
 }
