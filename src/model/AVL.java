@@ -411,7 +411,7 @@ public class AVL<V> implements aTree<V> {
 
     @Override
     public String toString() {
-        return "BinaryTree{  " +
+        return "AVL{  " +
                 "root=" + root +
                 "  }";
 

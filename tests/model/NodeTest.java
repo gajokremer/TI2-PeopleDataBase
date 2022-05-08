@@ -60,8 +60,4 @@ class NodeTest {
 
 //        System.out.println("\nDepth: " + binaryTree.getRoot().balanceFactor());
     }
-
-    @Test
-    void compareTo() {
-    }
 }

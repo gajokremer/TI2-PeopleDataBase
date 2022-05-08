@@ -127,7 +127,7 @@ public class Node<V> implements Balanced, Serializable {
 
     @Override
     public String toString() {
-        return "BinNode{ " +
+        return "Node{ " +
                 "value=" + value +
 //                ", parent=" + parent +
                 ", left=" + left +

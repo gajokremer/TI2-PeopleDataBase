@@ -134,7 +134,6 @@ public class Person implements Serializable {
                 '}';
 
 //        return "code='" + code + '\'' +
-//        return  ", height=" + height +
 //                ", full name='" + (name + " " + surname) + '\'';
     }
 
@@ -142,11 +141,4 @@ public class Person implements Serializable {
     public int hashCode() {
         return Objects.hash(name, surname, gender, birthDate, height, nationality, photo);
     }
-
-//    @Override
-//    public int compareTo(Person o) {
-//
-//        return Integer.compare(code, o.getCode());
-////        return Double.compare(height, o.getHeight());
-//    }
 }

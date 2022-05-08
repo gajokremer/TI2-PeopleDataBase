@@ -197,7 +197,7 @@ public class DataBase {
 
             String name, surname, birthDate, nationality;
             Gender gender = null;
-            double height = 0;
+            int height = 0;
 
             BufferedReader br = new BufferedReader(new FileReader(NAME_SOURCE));
 //            String line = br.readLine();
@@ -215,12 +215,12 @@ public class DataBase {
             if (parts[1].equals("boy")) {
 
                 gender = Gender.MALE;
-                height = 170 + (Math.random() * ((195 - 170) + 1));
+                height = (int) (170 + (Math.random() * ((195 - 170) + 1)));
 
             } else if (parts[1].equals("girl")) {
 
                 gender = Gender.FEMALE;
-                height = 155 + (Math.random() * ((170 - 155) + 1));
+                height = (int) (155 + (Math.random() * ((170 - 155) + 1)));
             }
 
             line = br.readLine();
@@ -242,11 +242,72 @@ public class DataBase {
 
             birthDate = generateRandomBirthDate();
 
-            nationality = "American";
+//            nationality = "American";
+
+            nationality = generateRandomNationality();
 
             Person person = new Person(name, surname, gender, birthDate, height, nationality);
             insertToAllTrees(person);
         }
+    }
+
+    private String generateRandomNationality() {
+
+        int number = 1 + (int) (Math.random() * ((13 - 1) + 1));
+        String nationality = "";
+
+        switch (number) {
+
+            case 1:
+                nationality = "American";
+                break;
+
+            case 2:
+                nationality = "German";
+                break;
+
+            case 3:
+                nationality = "Irish";
+                break;
+
+            case 4:
+                nationality = "English";
+                break;
+
+            case 5:
+                nationality = "Mexican";
+                break;
+
+            case 6:
+                nationality = "Italian";
+                break;
+
+            case 7:
+                nationality = "Polish";
+                break;
+
+            case 8:
+                nationality = "French";
+                break;
+
+            case 9:
+                nationality = "Scottish";
+                break;
+
+            case 10:
+                nationality = "Dutch";
+                break;
+
+            case 11:
+                nationality = "Norwegian";
+                break;
+
+            case 12:
+                nationality = "Swedish";
+                break;
+        }
+
+        return nationality.toUpperCase();
     }
 
     private String generateRandomBirthDate() {
